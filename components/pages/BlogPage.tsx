@@ -7,6 +7,14 @@ import { ArrowRight, Calendar } from 'lucide-react';
 // Blog posts metadata - will be replaced with actual content loading
 const blogPosts = [
     {
+        slug: 'literacia-financeira-portugal',
+        title: 'Literacia Financeira em Portugal: Guia Completo 2026',
+        description: 'Aprende a gerir as tuas finanças em Portugal. Descobre os 5 pilares da literacia financeira, dicas de poupança e como proteger a tua privacidade.',
+        date: '2026-02-03',
+        readTime: '6 min',
+        tags: ['literacia financeira', 'finanças pessoais', 'portugal'],
+    },
+    {
         slug: 'como-criar-orcamento-pessoal',
         title: 'Como Criar um Orçamento Pessoal em 5 Passos Simples',
         description: 'Aprende a criar um orçamento mensal eficaz em apenas 5 passos. Guia prático para começares a controlar as tuas finanças hoje.',

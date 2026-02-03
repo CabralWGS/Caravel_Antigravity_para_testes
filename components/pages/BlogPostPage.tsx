@@ -19,6 +19,138 @@ interface BlogPost {
 
 // Sample blog posts data - in production, load from /content/blog/
 const blogPostsData: Record<string, BlogPost> = {
+    'literacia-financeira-portugal': {
+        slug: 'literacia-financeira-portugal',
+        title: 'Literacia Financeira em Portugal: Guia Completo 2026',
+        description: 'Aprende a gerir as tuas finanças em Portugal. Descobre os 5 pilares da literacia financeira, dicas de poupança e como proteger a tua privacidade.',
+        date: '2026-02-03',
+        readTime: '6 min',
+        author: 'Caravel Team',
+        tags: ['literacia financeira', 'finanças pessoais', 'portugal'],
+        content: `
+## TL;DR
+
+Literacia financeira é a capacidade de tomar decisões informadas sobre o teu dinheiro. Em Portugal, a tendência é clara: cada vez mais pessoas procuram autonomia, segurança e privacidade. Descobre os 5 pilares essenciais e como assumir o leme das tuas finanças.
+
+---
+
+## Porque É Que a Literacia Financeira É Essencial?
+
+A realidade é clara: quem não compreende como o dinheiro funciona, acaba por ser controlado por ele. Em contrapartida, quem domina os princípios básicos da gestão financeira conquista:
+
+- **Autonomia** — Tomas decisões sem depender de terceiros
+- **Segurança** — Constróis uma reserva de emergência sólida
+- **Liberdade** — Planeias o futuro com confiança
+- **Privacidade** — Manténs o controlo sobre os teus dados financeiros
+
+> A literacia financeira não é um luxo. É a bússola que te guia em águas turbulentas.
+
+---
+
+## O Novo Paradigma: Aprendizagem Comunitária
+
+Antigamente, a educação financeira vinha dos bancos ou de consultores. Hoje, os portugueses estão a mudar essa dinâmica. Comunidades no Reddit, grupos no Discord e fóruns especializados tornaram-se fontes primárias de conhecimento.
+
+### Porquê esta mudança?
+
+1. **Desconfiança nas instituições tradicionais** — Escândalos bancários e taxas ocultas criaram ceticismo
+2. **Acesso democratizado** — A internet eliminou barreiras de entrada
+3. **Experiências reais partilhadas** — Pessoas comuns a ajudar pessoas comuns
+4. **Velocidade** — Respostas imediatas vs. marcar reunião no banco
+
+Esta tendência reflete algo mais profundo: a vontade de **retomar o controlo**. Não se trata apenas de poupar dinheiro — trata-se de construir conhecimento próprio, sem intermediários.
+
+---
+
+## Os 5 Pilares da Literacia Financeira
+
+Para quem está a começar esta expedição, eis os fundamentos essenciais:
+
+### 1. Orçamentação Consciente
+
+Saber exatamente para onde vai cada euro é o primeiro passo. Sem este mapa, navegas às cegas.
+
+- Regista todas as despesas (sim, todas)
+- Categoriza por necessidade vs. desejo
+- Revê mensalmente e ajusta
+
+### 2. Fundo de Emergência
+
+Antes de pensar em investir, constrói uma reserva equivalente a 3-6 meses de despesas. Esta é a tua âncora em tempestades inesperadas.
+
+### 3. Gestão de Dívida
+
+Nem toda a dívida é igual. Prioriza eliminar dívidas de alto juro (cartões de crédito) antes de acumular ativos.
+
+### 4. Poupança Automática
+
+O segredo não é disciplina sobre-humana — é automatização. Configura transferências automáticas no dia do salário.
+
+### 5. Educação Contínua
+
+A literacia financeira não é um destino, é uma viagem. Reserva 30 minutos por semana para aprender algo novo sobre finanças.
+
+---
+
+## Privacidade: O Elemento Esquecido
+
+Num mundo onde as aplicações financeiras proliferam, há uma questão que poucos colocam: **quem tem acesso aos teus dados?**
+
+A tua informação financeira é uma das mais sensíveis que existe. Revela:
+- Quanto ganhas
+- Onde gastas
+- Os teus hábitos de vida
+- As tuas vulnerabilidades
+
+Escolher ferramentas que respeitam a tua privacidade não é paranoia — é prudência. Procura aplicações que:
+
+- Não vendam os teus dados a terceiros
+- Armazenem informação de forma encriptada
+- Te dêem controlo total sobre o que partilhas
+
+---
+
+## Como Começar Hoje
+
+A literacia financeira não exige um MBA. Exige apenas três coisas:
+
+1. **Curiosidade** — Questiona tudo o que te dizem sobre dinheiro
+2. **Consistência** — Pequenos passos diários superam grandes planos abandonados
+3. **Ferramentas certas** — Uma boa aplicação de gestão financeira pode ser o teu primeiro-imediato
+
+> "Assumir o leme das finanças" não é apenas um slogan — é uma decisão diária.
+
+---
+
+## Próximo Passo
+
+A tua expedição financeira começa com uma decisão: deixar de ser passageiro e passar a ser capitão.
+
+Se procuras uma ferramenta que te ajude a organizar as tuas finanças com total privacidade e controlo manual, sem algoritmos a decidir por ti — a Caravel foi desenhada exatamente para isso.
+        `,
+        faq: [
+            {
+                question: 'Onde devo guardar o fundo de emergência?',
+                answer: 'Numa conta poupança de fácil acesso mas separada da conta corrente. Evita investimentos voláteis – o objetivo é segurança, não rentabilidade.'
+            },
+            {
+                question: 'O que é literacia financeira?',
+                answer: 'Literacia financeira é o conjunto de conhecimentos e competências que permitem tomar decisões informadas sobre gestão de dinheiro, poupança, investimento e planeamento financeiro.'
+            },
+            {
+                question: 'Porque é importante ter literacia financeira?',
+                answer: 'Permite tomar decisões autónomas, construir segurança financeira, planear o futuro com confiança e proteger-se de fraudes ou decisões impulsivas.'
+            },
+            {
+                question: 'Como posso melhorar a minha literacia financeira?',
+                answer: 'Começa por registar as tuas despesas, cria um orçamento mensal, define objetivos de poupança e dedica tempo semanal a aprender sobre finanças pessoais através de livros, podcasts ou comunidades online.'
+            },
+            {
+                question: 'Qual é a diferença entre poupar e investir?',
+                answer: 'Poupar é guardar dinheiro de forma segura para necessidades futuras. Investir é alocar dinheiro em ativos com potencial de crescimento, aceitando algum nível de risco.'
+            }
+        ]
+    },
     'como-criar-orcamento-pessoal': {
         slug: 'como-criar-orcamento-pessoal',
         title: 'Como Criar um Orçamento Pessoal em 5 Passos Simples',
