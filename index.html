@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO & Meta Tags -->
+  <title>Caravel | Gestão Financeira Pessoal Manual & Privada</title>
+  <meta name="description"
+    content="A Caravel é o teu dashboard de finanças pessoais 100% manual e privado. Sem ligações bancárias. Conquista clareza sobre o teu património com 5 minutos por mês.">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Caravel | Assume o Rumo das Tuas Finanças">
+  <meta property="og:description"
+    content="Dashboard de finanças pessoais 100% manual e privado. Conquista clareza sobre o teu património com 5 minutos por mês.">
+  <meta property="og:url" content="https://thecaravelapp.com">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://thecaravelapp.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:site_name" content="Caravel">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Caravel | Gestão Financeira Pessoal">
+  <meta name="twitter:description"
+    content="Dashboard de finanças pessoais 100% manual e privado. Sem ligações bancárias.">
+  <meta name="twitter:image" content="https://thecaravelapp.com/og-image.png">
+
+  <!-- JSON-LD Schema Markup for SEO/AEO/GEO -->
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://thecaravelapp.com/#organization",
+      "name": "Caravel",
+      "url": "https://thecaravelapp.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://thecaravelapp.com/favicon.svg",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Caravel - Gestão Financeira Pessoal 100% Manual e Privada. A tua bússola financeira sem ligações bancárias.",
+      "foundingDate": "2024",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "captain@thecaravelapp.com",
+        "contactType": "customer support",
+        "availableLanguage": ["Portuguese", "English"]
+      },
+      "slogan": "Assume o Rumo das Tuas Finanças"
+    }
+  </script>
+
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://thecaravelapp.com/#website",
+      "name": "Caravel",
+      "url": "https://thecaravelapp.com",
+      "description": "Dashboard de finanças pessoais 100% manual e privado. Conquista clareza sobre o teu património com 5 minutos por mês.",
+      "publisher": {
+        "@id": "https://thecaravelapp.com/#organization"
+      },
+      "inLanguage": "pt-PT"
+    }
+  </script>
+
+  <!-- SoftwareApplication Schema (Enhanced) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://thecaravelapp.com/#app",
+      "name": "Caravel",
+      "operatingSystem": "Web",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "Personal Finance Management",
+      "description": "Aplicação web de finanças pessoais focada em privacidade e registo manual de património e transações. Sem ligações bancárias, 100% controlo manual.",
+      "author": {
+        "@id": "https://thecaravelapp.com/#organization"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "500",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Marinheiro (Gratuito)",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "description": "Plano gratuito com funcionalidades essenciais"
+        },
+        {
+          "@type": "Offer",
+          "name": "Capitão (Premium)",
+          "price": "2.99",
+          "priceCurrency": "EUR",
+          "billingDuration": "P1M",
+          "description": "Plano premium com funcionalidades avançadas"
+        }
+      ],
+      "featureList": [
+        "Registo manual de transações",
+        "Dashboard de património",
+        "100% privado - sem ligações bancárias",
+        "Análise mensal com Bússola Financeira",
+        "Suporte para múltiplas contas"
+      ],
+      "softwareVersion": "1.0",
+      "datePublished": "2024-01-01",
+      "inLanguage": "pt-PT"
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.png"> <!-- Fallback -->
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Fonts: Playfair Display (luxury headings) + Inter Tight (modern body) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- 1. Carregar o Tailwind primeiro -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 2. Configurar o Tailwind DEPOIS de ele estar carregado -->
+  <script>
+    // Configure Tailwind with design tokens
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['Playfair Display', 'serif'],
+            'sans': ['Inter Tight', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Design System Utilities */
+
+    /* Glassmorphism Effects */
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dark .glass {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Floating Navbar */
+    .navbar-floating {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .dark .navbar-floating {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    /* Premium Card Hover */
+    .card-premium {
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card-premium:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark .card-premium:hover {
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+
+      .card-premium,
+      .animate-fade-in,
+      .animate-fade-in-scale,
+      .animate-slide-in-right,
+      .animate-value-fade-in {
+        transition: none;
+        animation: none;
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    }
+
+    .animate-fade-in-scale {
+      animation: fade-in-scale 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    }
+
+    .animate-slide-in-right {
+      animation: slide-in-right 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    }
+
+    .animate-value-fade-in {
+      animation: value-fade-in 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    }
+
+    .animate-highlight-breathe {
+      animation: highlight-breathe-light 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+    }
+
+    .dark .animate-highlight-breathe {
+      animation-name: highlight-breathe-dark;
+    }
+
+    .collapsible-content {
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-in-scale {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slide-in-right {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes value-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes highlight-breathe-light {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.08);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    @keyframes highlight-breathe-dark {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    /* Initial Loading Spinner */
+    #root:empty::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3rem;
+      height: 3rem;
+      margin: -1.5rem 0 0 -1.5rem;
+      border: 4px dashed;
+      border-color: #000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .dark #root:empty::before {
+      border-color: #fff;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .dark .logo-img {
+      filter: invert(1);
+    }
+  </style>
+  <script>
+      // Anti-flicker script for dark mode
+      (function () {
+        try {
+          const theme = localStorage.getItem('theme');
+          if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          console.error("Could not set theme from localStorage", e);
+        }
+      })();
+  </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1?deps=react@18.2.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.378.0?deps=react@18.2.0",
+    "recharts": "https://esm.sh/recharts@2.12.7?deps=react@18.2.0,react-dom@18.2.0",
+    "uuid": "https://esm.sh/uuid@9.0.1",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.43.4",
+    "@google/genai": "https://esm.sh/@google/genai@0.14.0"
+  }
+}
+</script>
+</head>
+
+<body class="bg-white dark:bg-black text-neutral-900 dark:text-neutral-50 antialiased transition-colors duration-300"
+  style="font-family: 'Inter Tight', sans-serif;">
+  <div id="root"></div>
+  <div id="modal-root"></div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+
+</html>
