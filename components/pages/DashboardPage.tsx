@@ -399,32 +399,113 @@ const ExpenseAnalysisPanel: React.FC<{
     }
 
     return (
+        <Card className="h-full flex flex-col" onMouseLeave={() => setHoveredCategory(null)}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                <h3 className="text-lg font-bold">Análise de Despesas</h3>
+                <div className="flex space-x-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg self-end sm:self-center">
+                    {timeRanges.map(range => (
+                        <button key={range.id} onClick={() => { setTimeRange(range.id); setSelectedCategory(null); }} className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${timeRange === range.id ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>{range.label}</button>
+                    ))}
+                </div>
+            </div>
+
+            <div key={timeRange} className="animate-fade-in-scale flex-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center h-full">
+                    <div className="h-56 relative mx-auto w-full max-w-[240px] sm:max-w-none">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                                <Pie
+                                    data={expenseData.data}
+                                    cx="50%"
+                                    cy="50%"
+                                    labelLine={false}
+                                    innerRadius="60%"
+                                    outerRadius="90%"
+                                    dataKey="value"
+                                    onMouseEnter={(data) => setHoveredCategory(data.id)}
+                                    paddingAngle={3}
+                                    // @ts-ignore
+                                    activeIndex={activeIndex}
+                                    activeShape={renderActiveShape}
+                                    inactiveShape={renderInactiveShape}
+                                >
+                                    {expenseData.data.map((entry) => (
+                                        <Cell key={`cell-${entry.id}`} fill={getCategoryColor(entry.name)} strokeWidth={0} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+                        </ResponsiveContainer>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="text-center">
+                                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-medium uppercase tracking-wider">Total</p>
+                                <p className="text-xl font-bold tracking-tight">{currencySymbol}{expenseData.total.toLocaleString('pt-PT', { notation: "compact", maximumFractionDigits: 1 })}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="h-full max-h-64 overflow-y-auto pr-1 relative custom-scrollbar">
+                        {selectedCategory ? (
+                            <div key={selectedCategory.id} className="animate-fade-in-scale">
+                                <div className="flex items-center gap-2 mb-4 sticky top-0 bg-white dark:bg-neutral-900 py-2 z-10 border-b border-neutral-50 dark:border-neutral-800">
+                                    <button onClick={() => setSelectedCategory(null)} className="p-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus-visible:ring-2">
+                                        <ArrowLeft className="h-4 w-4" />
+                                    </button>
+                                    <h4 className="font-bold text-sm truncate">{selectedCategory.name}</h4>
+                                </div>
+                                <div className="space-y-3">
+                                    {transactionsForSelectedCategory.map(t => (
+                                        <div key={t.id} className="flex justify-between items-center">
+                                            <div>
+                                                <p className="font-medium text-xs">{getTransactionDescription(t, accountMap, categoryMap)}</p>
+                                                <p className="text-[10px] text-neutral-500 dark:text-neutral-400">{t.data}</p>
+                                            </div>
+                                            <p className={`font-mono tracking-tight font-semibold text-xs`}>{currencySymbol}{t.valor.toFixed(2)}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : (
+                            <div key="categories" className="animate-fade-in-scale space-y-1">
+                                {expenseData.data.map(entry => {
+                                    const percentage = expenseData.total > 0 ? (entry.value / expenseData.total) * 100 : 0;
+                                    const isHovered = hoveredCategory === entry.id;
+                                    const hasVariation = entry.hasPrevious && Math.abs(entry.variation) > 0.01;
+
+                                    return (
+                                        <div
+                                            key={`legend-${entry.id}`}
+                                            className={`p-2 rounded-lg cursor-pointer transition-all duration-200 ${isHovered ? 'bg-neutral-100 dark:bg-neutral-800' : ''}`}
+                                            onMouseEnter={() => setHoveredCategory(entry.id)}
+                                            onClick={() => setSelectedCategory({ id: entry.id, name: entry.name })}
+                                        >
+                                            <div className="flex items-center justify-between mb-1">
+                                                <div className="flex items-center gap-2 min-w-0">
                                                     <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: getCategoryColor(entry.name) }}></span>
                                                     <span className="font-medium text-sm truncate">{entry.name}</span>
-                                                </div >
-    <div className="flex items-center gap-2">
-        <span className="font-mono tracking-tight font-semibold text-sm">{currencySymbol}{entry.value.toLocaleString('pt-PT', { maximumFractionDigits: 0 })}</span>
-        {hasVariation && (
-            <Tooltip text={`Variação de ${currencySymbol}${Math.abs(entry.variation).toFixed(2)} vs período anterior`}>
-                <div className={`flex items-center px-1 py-0.5 rounded text-[10px] font-bold ${entry.variation > 0 ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'}`}>
-                    {entry.variation > 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
-                </div>
-            </Tooltip>
-        )}
-    </div>
-                                            </div >
-    <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5">
-        <div className="h-1.5 rounded-full transition-all duration-500" style={{ width: `${percentage}%`, backgroundColor: getCategoryColor(entry.name) }}></div>
-    </div>
-                                        </div >
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="font-mono tracking-tight font-semibold text-sm">{currencySymbol}{entry.value.toLocaleString('pt-PT', { maximumFractionDigits: 0 })}</span>
+                                                    {hasVariation && (
+                                                        <Tooltip text={`Variação de ${currencySymbol}${Math.abs(entry.variation).toFixed(2)} vs período anterior`}>
+                                                            <div className={`flex items-center px-1 py-0.5 rounded text-[10px] font-bold ${entry.variation > 0 ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'}`}>
+                                                                {entry.variation > 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+                                                            </div>
+                                                        </Tooltip>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5">
+                                                <div className="h-1.5 rounded-full transition-all duration-500" style={{ width: `${percentage}%`, backgroundColor: getCategoryColor(entry.name) }}></div>
+                                            </div>
+                                        </div>
                                     )
-                                 })}
-                            </div >
+                                })}
+                            </div>
                         )}
-                    </div >
-                </div >
-            </div >
-        </Card >
+                    </div>
+                </div>
+            </div>
+        </Card>
     );
 };
 
