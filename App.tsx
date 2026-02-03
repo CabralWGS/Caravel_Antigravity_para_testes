@@ -51,18 +51,22 @@ const App: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-50 transition-colors duration-300 antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       {!session && <CookieBanner />}
-      <div className="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 pb-28 sm:pb-8">
+
+      {/* Main Container with refined spacing */}
+      <div className="container mx-auto w-full px-6 sm:px-8 lg:px-12 pb-32 pt-8 sm:py-16 bg-white dark:bg-neutral-950 rounded-lg shadow-lg">
 
         <AppTabs />
 
-        <main className="mt-4 sm:mt-8">
+        <main className="mt-6 sm:mt-10">
           {isLoading ? (
-            <div className="min-h-[50vh] flex items-center justify-center">
-              <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-black dark:border-white" role="status">
-                <span className="sr-only">A carregar...</span>
+            <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+              <div className="relative">
+                <div className="w-12 h-12 border-4 border-neutral-200 dark:border-neutral-800 rounded-full"></div>
+                <div className="absolute top-0 left-0 w-12 h-12 border-4 border-black dark:border-white rounded-full animate-spin border-t-transparent dark:border-t-transparent"></div>
               </div>
+              <p className="text-sm font-medium text-neutral-500 animate-pulse">A carregar...</p>
             </div>
           ) : (
             <div key={location.pathname} className="animate-fade-in">

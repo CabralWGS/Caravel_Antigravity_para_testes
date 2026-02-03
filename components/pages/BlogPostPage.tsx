@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Logo } from '../ui/Logo.tsx';
 import { Footer } from '../landing/Footer.tsx';
-import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Share2, User } from 'lucide-react';
+import { Card } from '../ui/Card.tsx';
 
 // Blog post content storage - this will be populated with actual markdown content
 interface BlogPost {
@@ -308,13 +309,14 @@ Um fundo de emergência dá-te paz de espírito e liberdade financeira. Começa 
 };
 
 const BlogHeader: React.FC = () => (
-    <header className="py-6 px-4 sm:px-6 lg:px-8 border-b border-neutral-200 dark:border-neutral-800">
-        <div className="container mx-auto max-w-7xl flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
             <Link to="/" aria-label="Voltar à página inicial" title="Caravel - Gestão Financeira Pessoal">
-                <Logo variant="full" className="h-16" />
+                <Logo variant="full" className="h-20" />
             </Link>
             <nav className="flex items-center gap-6">
-                <Link to="/login" className="font-semibold text-sm hover:underline">Entrar</Link>
+                <Link to="/blog" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Blog</Link>
+                <Link to="/login" className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors">Entrar</Link>
             </nav>
         </div>
     </header>
@@ -325,6 +327,7 @@ const BlogPostPage: React.FC = () => {
     const [post, setPost] = useState<BlogPost | null>(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (slug && blogPostsData[slug]) {
             setPost(blogPostsData[slug]);
         }
@@ -332,14 +335,17 @@ const BlogPostPage: React.FC = () => {
 
     if (!post) {
         return (
-            <div className="bg-white dark:bg-black text-black dark:text-white min-h-screen">
+            <div className="bg-neutral-50 dark:bg-black text-black dark:text-white min-h-screen flex flex-col">
                 <BlogHeader />
-                <main className="container mx-auto max-w-4xl px-4 py-12 text-center">
-                    <h1 className="text-2xl font-bold">Artigo não encontrado</h1>
-                    <p className="mt-4 text-neutral-600 dark:text-neutral-300">
-                        O artigo que procuras não existe.
+                <main className="flex-grow flex flex-col items-center justify-center container mx-auto max-w-4xl px-4 py-32 text-center">
+                    <div className="w-16 h-16 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mb-6">
+                        <ArrowLeft className="w-8 h-8 text-neutral-400" />
+                    </div>
+                    <h1 className="text-3xl font-bold font-display mb-4">Artigo não encontrado</h1>
+                    <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-md mx-auto mb-8">
+                        O artigo que procuras não existe ou foi removido.
                     </p>
-                    <Link to="/blog" className="mt-6 inline-flex items-center gap-2 font-semibold hover:underline">
+                    <Link to="/blog" className="inline-flex items-center gap-2 font-semibold text-black dark:text-white hover:underline">
                         <ArrowLeft className="w-4 h-4" /> Voltar ao blog
                     </Link>
                 </main>
@@ -351,84 +357,84 @@ const BlogPostPage: React.FC = () => {
     const shareUrl = `https://thecaravelapp.com/blog/${post.slug}`;
 
     return (
-        <div className="bg-white dark:bg-black text-black dark:text-white min-h-screen">
+        <div className="bg-neutral-50 dark:bg-black text-black dark:text-white min-h-screen flex flex-col selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
             <BlogHeader />
 
-            <main className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12">
-                {/* Back Link */}
-                <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold hover:underline mb-8">
-                    <ArrowLeft className="w-4 h-4" /> Voltar ao blog
-                </Link>
+            <main className="flex-grow pt-24 pb-20">
+                {/* Hero / Header Section */}
+                <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mb-12">
+                    <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-black dark:hover:text-white mb-8 transition-colors">
+                        <ArrowLeft className="w-4 h-4" /> Voltar ao blog
+                    </Link>
 
-                {/* Article Header */}
-                <article>
-                    <header>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
-                            <div className="flex items-center gap-1">
-                                <Calendar className="w-4 h-4" />
-                                <time dateTime={post.date}>
-                                    {new Date(post.date).toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
-                                </time>
-                            </div>
-                            <span>•</span>
-                            <div className="flex items-center gap-1">
-                                <Clock className="w-4 h-4" />
-                                <span>{post.readTime} de leitura</span>
-                            </div>
-                        </div>
-
-                        <h1 className="mt-4 font-display text-3xl sm:text-4xl font-extrabold tracking-tight">
-                            {post.title}
-                        </h1>
-
-                        <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-300">
-                            {post.description}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="space-y-6">
+                        <div className="flex flex-wrap gap-2">
                             {post.tags.map(tag => (
-                                <span key={tag} className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 rounded-full">
+                                <span key={tag} className="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full text-neutral-600 dark:text-neutral-300">
                                     {tag}
                                 </span>
                             ))}
                         </div>
-                    </header>
 
-                    {/* Article Content */}
-                    <div className="mt-10 prose prose-neutral dark:prose-invert max-w-none
-            prose-headings:font-bold prose-headings:tracking-tight
-            prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-            prose-p:leading-relaxed
-            prose-li:leading-relaxed
-            prose-strong:font-semibold
-            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:underline
-          ">
-                        {/* Render content - split by lines and render basic markdown */}
+                        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-balance">
+                            {post.title}
+                        </h1>
+
+                        <p className="text-xl sm:text-2xl text-neutral-600 dark:text-neutral-400 leading-relaxed text-balance font-light">
+                            {post.description}
+                        </p>
+
+                        <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 mt-8">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
+                                    <User className="h-5 w-5 text-neutral-600 dark:text-neutral-300" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-black dark:text-white">{post.author}</p>
+                                    <div className="flex gap-3 text-xs">
+                                        <time dateTime={post.date}>
+                                            {new Date(post.date).toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        </time>
+                                        <span>•</span>
+                                        <span>{post.readTime} de leitura</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Article Image / Gradient Placeholder */}
+                <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mb-16">
+                    <div className="w-full h-64 sm:h-96 bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 rounded-2xl sm:rounded-3xl shadow-sm border border-neutral-200 dark:border-neutral-800 flex items-center justify-center overflow-hidden relative">
+                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+                        <Logo variant="icon" className="w-24 h-24 sm:w-32 sm:h-32 opacity-10 blur-xl" />
+                    </div>
+                </div>
+
+                {/* Article Content */}
+                <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+                    <article className="prose prose-lg prose-neutral dark:prose-invert max-w-none
+                        prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight
+                        prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6
+                        prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4
+                        prose-p:leading-loose prose-p:text-neutral-700 dark:prose-p:text-neutral-300
+                        prose-li:text-neutral-700 dark:prose-li:text-neutral-300
+                        prose-strong:font-bold prose-strong:text-black dark:prose-strong:text-white
+                        prose-a:text-black dark:prose-a:text-white prose-a:underline prose-a:decoration-1 prose-a:underline-offset-4 hover:prose-a:decoration-2
+                        prose-blockquote:border-l-4 prose-blockquote:border-black dark:prose-blockquote:border-white prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:font-display prose-blockquote:text-xl
+                        prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800 prose-hr:my-12
+                    ">
                         {post.content.split('\n').map((line, i) => {
-                            if (line.startsWith('## ')) {
-                                return <h2 key={i}>{line.replace('## ', '')}</h2>;
-                            }
-                            if (line.startsWith('### ')) {
-                                return <h3 key={i}>{line.replace('### ', '')}</h3>;
-                            }
-                            if (line.startsWith('- ')) {
-                                return <li key={i}>{line.replace('- ', '')}</li>;
-                            }
-                            if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ') || line.startsWith('4. ')) {
-                                return <li key={i}>{line.replace(/^\d\. /, '')}</li>;
-                            }
-                            if (line.startsWith('---')) {
-                                return <hr key={i} className="my-8" />;
-                            }
-                            if (line.startsWith('**') && line.endsWith('**')) {
-                                return <p key={i}><strong>{line.replace(/\*\*/g, '')}</strong></p>;
-                            }
-                            if (line.trim() === '') {
-                                return null;
-                            }
-                            // Handle bold within text
+                            if (line.startsWith('## ')) return <h2 key={i}>{line.replace('## ', '')}</h2>;
+                            if (line.startsWith('### ')) return <h3 key={i}>{line.replace('### ', '')}</h3>;
+                            if (line.startsWith('- ')) return <li key={i}>{line.replace('- ', '')}</li>;
+                            if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ') || line.startsWith('4. ') || line.startsWith('5. ')) return <li key={i}>{line.replace(/^\d\. /, '')}</li>;
+                            if (line.startsWith('---')) return <hr key={i} />;
+                            if (line.startsWith('> ')) return <blockquote key={i}>{line.replace('> ', '')}</blockquote>;
+
+                            if (line.trim() === '') return null;
+
                             const parts = line.split(/(\*\*[^*]+\*\*)/);
                             return (
                                 <p key={i}>
@@ -438,88 +444,62 @@ const BlogPostPage: React.FC = () => {
                                 </p>
                             );
                         })}
-                    </div>
+                    </article>
 
-                    {/* FAQ Section */}
+                    {/* FAQ Section with Premium Cards */}
                     {post.faq && post.faq.length > 0 && (
-                        <section className="mt-12 border-t border-neutral-200 dark:border-neutral-800 pt-10">
-                            <h2 className="font-display text-2xl font-bold tracking-tight mb-6">Perguntas Frequentes</h2>
-                            <div className="space-y-6">
+                        <section className="mt-20 pt-12 border-t border-neutral-200 dark:border-neutral-800">
+                            <h2 className="font-display text-3xl font-bold tracking-tight mb-8">Perguntas Frequentes</h2>
+                            <div className="grid gap-6">
                                 {post.faq.map((item, i) => (
-                                    <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-6">
-                                        <h3 className="text-lg font-semibold">{item.question}</h3>
-                                        <p className="mt-2 text-neutral-600 dark:text-neutral-300">{item.answer}</p>
+                                    <div key={i} className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl shadow-sm">
+                                        <h3 className="text-lg font-bold mb-2">{item.question}</h3>
+                                        <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.answer}</p>
                                     </div>
                                 ))}
                             </div>
                         </section>
                     )}
 
-                    {/* Share / CTA */}
-                    <div className="mt-12 p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl text-center">
-                        <p className="font-semibold text-lg">Gostaste deste artigo?</p>
-                        <p className="mt-2 text-neutral-600 dark:text-neutral-300">
-                            Experimenta a Caravel para gerir as tuas finanças com simplicidade.
-                        </p>
-                        <Link
-                            to="/login?view=signup"
-                            className="mt-4 inline-flex items-center justify-center px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-                        >
-                            Começar Grátis
-                        </Link>
+                    {/* CTA Section */}
+                    <div className="mt-20">
+                        <div className="relative p-8 sm:p-12 bg-black dark:bg-white text-white dark:text-black rounded-3xl overflow-hidden text-center">
+                            <div className="relative z-10">
+                                <h3 className="font-display text-3xl font-bold mb-4">Gostaste deste artigo?</h3>
+                                <p className="text-lg text-neutral-300 dark:text-neutral-600 mb-8 max-w-lg mx-auto">
+                                    A Caravel foi desenhada para quem quer aplicar estes princípios na prática. Simples, privada e manual.
+                                </p>
+                                <Link
+                                    to="/login?view=signup"
+                                    className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-black text-black dark:text-white font-bold rounded-full hover:scale-105 transition-transform duration-200 shadow-lg"
+                                >
+                                    Começar a Minha Jornada
+                                </Link>
+                            </div>
+                            {/* Decorative circles */}
+                            <div className="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-neutral-800 dark:bg-neutral-200 rounded-full opacity-20 blur-3xl"></div>
+                            <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-64 h-64 bg-neutral-800 dark:bg-neutral-200 rounded-full opacity-20 blur-3xl"></div>
+                        </div>
                     </div>
-                </article>
+                </div>
             </main>
 
             <Footer />
 
-            {/* Article Schema Markup */}
             <script type="application/ld+json" dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "Article",
                     "headline": post.title,
                     "description": post.description,
-                    "author": {
-                        "@type": "Organization",
-                        "name": "Caravel",
-                        "url": "https://thecaravelapp.com"
-                    },
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "Caravel",
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": "https://thecaravelapp.com/favicon.svg"
-                        }
-                    },
+                    "author": { "@type": "Organization", "name": "Caravel" },
+                    "publisher": { "@type": "Organization", "name": "Caravel", "logo": { "@type": "ImageObject", "url": "https://thecaravelapp.com/favicon.svg" } },
                     "datePublished": post.date,
                     "dateModified": post.date,
-                    "mainEntityOfPage": {
-                        "@type": "WebPage",
-                        "@id": shareUrl
-                    },
+                    "mainEntityOfPage": { "@type": "WebPage", "@id": shareUrl },
                     "inLanguage": "pt-PT"
                 })
             }} />
-
-            {/* FAQ Schema Markup */}
-            {post.faq && post.faq.length > 0 && (
-                <script type="application/ld+json" dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": post.faq.map(item => ({
-                            "@type": "Question",
-                            "name": item.question,
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": item.answer
-                            }
-                        }))
-                    })
-                }} />
-            )}
         </div>
     );
 };

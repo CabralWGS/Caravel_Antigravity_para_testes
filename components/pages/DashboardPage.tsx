@@ -176,7 +176,7 @@ const AssetAllocationPanel: React.FC<{
                 </div>
             </div>
 
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
                 <div className="h-56 relative">
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
@@ -661,7 +661,7 @@ const DashboardPage: React.FC = () => {
     return (
         <>
             <OnboardingModal isOpen={showOnboarding} onComplete={handleCompleteOnboarding} />
-            <div className="space-y-6 animate-fade-in-scale pb-8">
+            <div className="space-y-8 animate-fade-in-scale pb-8">
                 <div className="flex items-center gap-4">
                     <Logo variant="icon" className="h-12 w-12 flex-shrink-0" />
                     <div>
@@ -952,7 +952,7 @@ const DashboardPage: React.FC = () => {
                     </div>
                 </Card>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <AssetAllocationPanel
                         entries={sortedPatrimonioEntries}
                         accounts={config.accounts}
