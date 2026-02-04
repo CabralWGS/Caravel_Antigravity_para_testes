@@ -18,14 +18,14 @@ const AppTabs: React.FC = () => {
   ];
 
   const getLinkClassName = ({ isActive }: { isActive: boolean }) =>
-    `flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 flex-1 sm:flex-initial py-3 sm:py-4 transition-all duration-200 outline-none select-none touch-manipulation ${isActive
-      ? 'text-black dark:text-white sm:border-b-2 sm:border-black sm:dark:border-white'
-      : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300 sm:border-b-2 sm:border-transparent'
+    `flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 flex-1 sm:flex-initial py-3 sm:py-2.5 sm:px-4 transition-all duration-200 outline-none select-none touch-manipulation sm:rounded-full ${isActive
+      ? 'text-black dark:text-white sm:bg-neutral-100 sm:dark:bg-neutral-800'
+      : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300 sm:hover:bg-neutral-50 sm:dark:hover:bg-neutral-900'
     }`;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 sm:static bg-white/85 dark:bg-black/85 backdrop-blur-xl border-t border-neutral-200 dark:border-neutral-800 sm:bg-transparent sm:dark:bg-transparent sm:backdrop-blur-none sm:border-b sm:border-t-0 pb-[env(safe-area-inset-bottom)] sm:pb-0">
-      <div className="flex sm:space-x-8 px-2 sm:px-0 justify-around sm:justify-start h-[calc(3.5rem+env(safe-area-inset-bottom))] sm:h-auto items-center sm:items-stretch">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 sm:static bg-white/90 dark:bg-surface/90 backdrop-blur-xl border-t border-neutral-200 dark:border-neutral-800/50 sm:bg-transparent sm:dark:bg-transparent sm:backdrop-blur-none sm:border-none pb-[env(safe-area-inset-bottom)] sm:pb-0">
+      <div className="flex sm:gap-2 px-2 sm:px-0 justify-around sm:justify-start h-[calc(3.5rem+env(safe-area-inset-bottom))] sm:h-auto items-center sm:items-stretch">
         {tabs.map(tab => (
           <NavLink
             key={tab.path}
@@ -54,8 +54,8 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-50 transition-colors duration-300 antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       {!session && <CookieBanner />}
 
-      {/* Main Container with refined spacing */}
-      <div className="container mx-auto w-full px-6 sm:px-8 lg:px-12 pb-32 pt-8 sm:py-16 bg-white dark:bg-neutral-950 rounded-lg shadow-lg">
+      {/* Main Container - Clean, no shadow */}
+      <div className="container mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-32 pt-6 sm:py-12">
 
         <AppTabs />
 

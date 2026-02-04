@@ -22,7 +22,7 @@ type AssetTimeRange = '1M' | '3M' | 'YTD';
 const btnBase = 'inline-flex items-center justify-center rounded-full font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 dark:focus-visible:ring-offset-black';
 const btnSize = 'px-5 py-2 text-sm';
 const btnLight = 'bg-neutral-100 text-black dark:bg-neutral-800 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700 focus-visible:ring-black dark:focus-visible:ring-white';
-const btnPrimary = 'bg-black text-white dark:bg-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 focus-visible:ring-black dark:focus-visible:ring-white';
+const btnPrimary = 'bg-accent text-white hover:bg-blue-600 focus-visible:ring-accent';
 
 const ASSET_COLORS = [
     '#3b82f6', // Blue 500
@@ -726,14 +726,38 @@ const DashboardPage: React.FC = () => {
                         </ResponsiveContainer>
                     </div>
                     <div className="mt-4">
-                        <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm font-medium">Progresso</span>
-                            <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">Objetivo: {formatCurrency(patrimonioGoal)}</span>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Progresso</span>
+                            <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+                                Objetivo: {formatCurrency(patrimonioGoal)}
+                            </span>
                         </div>
-                        <div className="w-full bg-neutral-200 dark:bg-neutral-800 rounded-full h-2">
-                            <div className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all duration-500 ease-out" style={{ width: `${Math.min(progress, 100)}%` }}></div>
+                        <div className="relative w-full bg-neutral-200 dark:bg-neutral-800 rounded-full h-3 overflow-hidden">
+                            {/* Animated gradient progress bar */}
+                            <div
+                                className="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
+                                style={{
+                                    width: `${Math.min(progress, 100)}%`,
+                                    background: 'linear-gradient(90deg, #3B82F6 0%, #60A5FA 50%, #3B82F6 100%)',
+                                    backgroundSize: '200% 100%',
+                                    animation: 'shimmer 2s ease-in-out infinite'
+                                }}
+                            />
+                            {/* Glow effect */}
+                            <div
+                                className="absolute inset-y-0 left-0 rounded-full opacity-50 blur-sm"
+                                style={{
+                                    width: `${Math.min(progress, 100)}%`,
+                                    background: '#3B82F6'
+                                }}
+                            />
                         </div>
-                        <p className="text-right text-sm mt-1 text-neutral-500 dark:text-neutral-400">{progress.toFixed(1)}%</p>
+                        <div className="flex justify-between items-center mt-2">
+                            <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                                {progress >= 100 ? '🎉 Objetivo alcançado!' : `Faltam ${formatCurrency(Math.max(0, patrimonioGoal - currentPatrimonio))}`}
+                            </span>
+                            <span className="text-sm font-semibold tabular-nums text-accent">{progress.toFixed(1)}%</span>
+                        </div>
                     </div>
                 </Card>
 
@@ -939,9 +963,9 @@ const DashboardPage: React.FC = () => {
                 )}
 
                 <Card>
-                    <h3 className="font-bold mb-4">Ações Rápidas</h3>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <Link to="/app/transactions" className={`${btnBase} ${btnSize} ${btnLight} w-full sm:w-auto`}>
+                    <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight mb-4">Ações Rápidas</h3>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        <Link to="/app/transactions" className={`${btnBase} ${btnSize} ${btnPrimary} w-full sm:w-auto`}>
                             <Plus className="h-4 w-4 mr-2" />
                             Registar Transação
                         </Link>

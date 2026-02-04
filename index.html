@@ -133,9 +133,8 @@
   <link rel="alternate icon" href="/favicon.png"> <!-- Fallback -->
   <link rel="apple-touch-icon" href="/favicon.png">
 
-  <!-- Fonts: Playfair Display (luxury headings) + Inter Tight (modern body) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap"
+  <!-- Fonts: IBM Plex Sans (financial, professional) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <!-- 1. Carregar o Tailwind primeiro -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -147,16 +146,44 @@
       theme: {
         extend: {
           fontFamily: {
-            'display': ['Playfair Display', 'serif'],
-            'sans': ['Inter Tight', 'sans-serif']
+            'display': ['IBM Plex Sans', 'sans-serif'],
+            'sans': ['IBM Plex Sans', 'sans-serif']
+          },
+          colors: {
+            'surface': '#0F1419',
+            'surface-light': '#F8FAFC',
+            'accent': '#3B82F6',
+            'success': '#10B981',
+            'danger': '#EF4444',
+            'warning': '#F59E0B'
           }
         }
       }
     }
   </script>
   <style>
+    :root {
+      /* Premium Color Palette */
+      --color-primary: #0C0F1D;
+      --color-surface: #0F1419;
+      --color-surface-light: #F8FAFC;
+      --color-accent: #3B82F6;
+      --color-success: #10B981;
+      --color-danger: #EF4444;
+      --color-warning: #F59E0B;
+
+      /* Shadows */
+      --shadow-premium: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-premium-hover: 0 16px 48px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
     html {
       scroll-behavior: smooth;
+    }
+
+    /* Tabular numbers for financial data */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
     }
 
     /* Design System Utilities */
@@ -307,6 +334,16 @@
 
       50% {
         box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
       }
     }
 
