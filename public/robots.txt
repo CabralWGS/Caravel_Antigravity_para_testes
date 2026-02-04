@@ -1,5 +1,18 @@
+# Caravel - Robots.txt
+# https://thecaravelapp.com
+
 User-agent: *
 Allow: /
-Disallow: /app/
+Allow: /blog
+Allow: /blog/*
 
+# Bloquear páginas privadas
+Disallow: /dashboard
+Disallow: /patrimonio
+Disallow: /orcamento
+Disallow: /objetivos
+Disallow: /definicoes
+Disallow: /api/
+
+# Sitemap
 Sitemap: https://thecaravelapp.com/sitemap.xml
