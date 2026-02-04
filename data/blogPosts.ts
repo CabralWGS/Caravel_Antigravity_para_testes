@@ -427,15 +427,18 @@ O segredo está na seletividade: escolher veículos de qualidade, manter expecta
 };
 
 // Simplified posts array for listing (without full content)
-export const blogPosts = Object.values(blogPostsData).map(({ slug, title, description, date, readTime, tags, thumbnail }) => ({
-    slug,
-    title,
-    description,
-    date,
-    readTime,
-    tags,
-    thumbnail,
-}));
+// Sorted by date descending (most recent first)
+export const blogPosts = Object.values(blogPostsData)
+    .map(({ slug, title, description, date, readTime, tags, thumbnail }) => ({
+        slug,
+        title,
+        description,
+        date,
+        readTime,
+        tags,
+        thumbnail,
+    }))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 // Get post by slug
 export const getPostBySlug = (slug: string): BlogPost | undefined => blogPostsData[slug];

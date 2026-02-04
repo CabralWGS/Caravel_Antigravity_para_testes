@@ -22,7 +22,7 @@ const BlogCard: React.FC<{ post: typeof blogPosts[0] }> = ({ post }) => {
     const [imgError, setImgError] = React.useState(false);
 
     return (
-        <article className="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 ease-out">
+        <article className="group bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 ease-out">
             <Link to={`/blog/${post.slug}`} className="flex flex-col sm:flex-row">
                 {/* Thumbnail */}
                 <div className="sm:w-72 h-48 sm:h-auto bg-neutral-100 dark:bg-neutral-800 flex-shrink-0 overflow-hidden">
@@ -133,8 +133,8 @@ const BlogPage: React.FC = () => {
                             key={tag}
                             to={activeTag === tag ? '/blog' : `/blog?tag=${encodeURIComponent(tag)}`}
                             className={`px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 cursor-pointer ${activeTag === tag
-                                    ? 'bg-accent text-white border-accent'
-                                    : 'bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:border-accent hover:text-accent'
+                                ? 'bg-accent text-white border-accent'
+                                : 'bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:border-accent hover:text-accent'
                                 }`}
                         >
                             {tag}
