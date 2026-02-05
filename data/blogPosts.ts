@@ -25,12 +25,103 @@ export const allTags = [
     'fundo emergência',
     'investimentos',
     'mercados emergentes',
+    'irs',
+    'impostos',
 ] as const;
 
 export type BlogTag = typeof allTags[number];
 
 // Blog posts with full content
 export const blogPostsData: Record<string, BlogPost> = {
+    'guia-irs-2026': {
+        slug: 'guia-irs-2026',
+        title: 'IRS 2026: Guia Completo com Datas e Novos Escalões',
+        description: 'Prepara o IRS 2026 com o nosso guia essencial. Novas tabelas de retenção, prazos e-Fatura e como maximizar o teu reembolso.',
+        date: '2026-02-05',
+        readTime: '6 min',
+        author: 'Caravel Team',
+        tags: ['irs', 'impostos', 'finanças pessoais', 'portugal'],
+        thumbnail: '/blog/irs-2026-guide.png',
+        content: `
+## O Que Muda no IRS 2026?
+
+A campanha de IRS que se avizinha traz novidades que impactam diretamente a tua carteira. Com a atualização dos escalões em **3,51%** e o aumento do Mínimo de Existência para **€12.880**, muitos portugueses verão uma redução na fatura fiscal. Mas para tirares partido destas mudanças, precisas de navegar com precisão.
+
+> "Pagar apenas o que é justo não é fugir aos impostos — é literacia financeira."
+
+---
+
+## Calendário Essencial 2026
+
+Marca estas datas no teu mapa para evitar coimas e garantir o reembolso mais rápido possível:
+
+### Até 16 de Fevereiro
+- **Senhorios:** Comunicar duração/cessação de contratos de arrendamento.
+
+### Até 2 de Março (Data Crítica!)
+- **Validar Faturas:** Acede ao e-Fatura e classifica todas as despesas pendentes. Este é o passo mais importante para maximizar as deduções.
+- **Agregado Familiar:** Comunicar alterações ao agregado familiar (filhos que nasceram, casamentos, divórcios).
+
+### 15 a 31 de Março
+- **Reclamação:** Verificar despesas gerais familiares e dedutíveis. Se encontrares erros, é a altura de reclamar.
+- **Consignação:** Escolher a entidade para doar 0,5% do teu IRS (sem custos para ti).
+
+### 1 de Abril a 30 de Junho
+- **Entrega da Declaração:** Prazo único para entrega do IRS (Modo Automático ou Manual).
+
+---
+
+## Novos Escalões: Em que "Mar" Navegas?
+
+Para 2026 (rendimentos de 2025), os limites dos escalões foram atualizados para combater a "fiscal drag" (quando aumentos salariais são engolidos pela inflação fiscal).
+
+1. **1º Escalão:** Até €8.140 (Taxa: 13%)
+2. **2º Escalão:** Até €12.247
+3. **3º Escalão:** Até €17.158
+4. **4º Escalão:** Até €21.972
+
+**O que isto significa:** Se o teu salário aumentou menos de 3,5%, é provável que pagues menos imposto efetivo este ano.
+
+---
+
+## Como Maximizar o Reembolso (Legalmente)
+
+### 1. e-Fatura: A Tua Bússola
+Passa a pente fino todas as faturas. Muitas vezes, despesas de saúde ou educação ficam na categoria "Geral" por defeito. Classificá-las corretamente pode valer centenas de euros.
+
+### 2. Poupança-Reforma (PPR)
+Se subscreveste um PPR em 2025, podes deduzir 20% do valor investido (até €400 de benefício, dependendo da tua idade). Esta é uma das poucas deduções que depende inteiramente da tua iniciativa.
+
+### 3. Educação e Rendas
+Estudantes deslocados? Rendas de casa? Certifica-te que os contratos estão registados e as faturas emitidas com o NIF correto. O benefício nas rendas pode chegar aos €600.
+
+---
+
+## Conclusão
+
+O IRS não tem de ser um monstro marinho. Com organização antecipada e conhecimento dos prazos, transformas uma obrigação burocrática numa oportunidade de rever a saúde das tuas finanças.
+
+Assome o leme hoje: entra no Portal das Finanças e valida as tuas primeiras faturas. A tua expedição para um reembolso maior começa agora.
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
+        `,
+        faq: [
+            {
+                question: 'Quando começa a entrega do IRS em 2026?',
+                answer: 'A entrega da declaração de IRS decorre entre 1 de abril e 30 de junho de 2026, independentemente da categoria de rendimentos.'
+            },
+            {
+                question: 'Até quando tenho de validar as faturas?',
+                answer: 'Deves validar todas as tuas faturas no portal e-Fatura até ao dia 2 de março de 2026.'
+            },
+            {
+                question: 'O que acontece se não validar as faturas?',
+                answer: 'Se não validares, as despesas podem não ser consideradas para efeitos de dedução à coleta, resultando num reembolso menor ou mais imposto a pagar.'
+            }
+        ]
+    },
     'literacia-financeira-portugal': {
         slug: 'literacia-financeira-portugal',
         title: 'Literacia Financeira em Portugal: Guia Completo 2026',

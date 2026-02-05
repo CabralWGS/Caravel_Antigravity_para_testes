@@ -22,6 +22,12 @@
   
   <!-- Artigos do Blog -->
   <url>
+    <loc>https://thecaravelapp.com/blog/guia-irs-2026</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thecaravelapp.com/blog/mercados-emergentes-2026</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>

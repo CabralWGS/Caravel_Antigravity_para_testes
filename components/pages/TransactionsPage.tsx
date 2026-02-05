@@ -258,7 +258,7 @@ const TransactionsPage: React.FC = () => {
             <div className="mb-6 space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1.5">Filtrar por Tipo</label>
-                    <div className="flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800">
+                    <div className="flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-x-auto no-scrollbar">
                         {(['todos', 'despesa', 'rendimento', 'transferencia'] as const).map(type => {
                             const labels = { todos: 'Todos', despesa: 'Despesas', rendimento: 'Rendimentos', transferencia: 'Transferências' };
                             return (
