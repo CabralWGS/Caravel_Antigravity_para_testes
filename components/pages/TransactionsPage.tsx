@@ -257,15 +257,16 @@ const TransactionsPage: React.FC = () => {
 
             <div className="mb-6 space-y-4">
                 <div>
+
                     <label className="block text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1.5">Filtrar por Tipo</label>
-                    <div className="flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-x-auto no-scrollbar">
+                    <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800">
                         {(['todos', 'despesa', 'rendimento', 'transferencia'] as const).map(type => {
                             const labels = { todos: 'Todos', despesa: 'Despesas', rendimento: 'Rendimentos', transferencia: 'Transferências' };
                             return (
                                 <button
                                     key={type}
                                     onClick={() => setFilter('tipo', type)}
-                                    className={`flex-1 group flex items-center justify-center gap-1.5 py-2 px-2 sm:px-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:focus-visible:ring-offset-black ${filterTipo === type
+                                    className={`flex-1 group flex items-center justify-center gap-1.5 py-3 sm:py-2 px-2 sm:px-3 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:focus-visible:ring-offset-black ${filterTipo === type
                                         ? 'bg-white shadow-sm dark:bg-neutral-700 text-black dark:text-white'
                                         : 'text-neutral-500 dark:text-neutral-400 hover:bg-white/60 dark:hover:bg-neutral-700/60'
                                         }`}

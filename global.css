@@ -3,9 +3,22 @@
 @tailwind utilities;
 
 @layer utilities {
+
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

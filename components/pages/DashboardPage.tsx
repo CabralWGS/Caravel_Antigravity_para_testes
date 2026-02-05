@@ -169,9 +169,9 @@ const AssetAllocationPanel: React.FC<{
                 <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold">Onde está o dinheiro?</h3>
                 </div>
-                <div className="flex space-x-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg self-end sm:self-center overflow-x-auto no-scrollbar">
+                <div className="grid grid-cols-3 gap-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg self-end sm:self-center">
                     {timeRanges.map(range => (
-                        <button key={range.id} onClick={() => setTimeRange(range.id)} className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${timeRange === range.id ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>{range.label}</button>
+                        <button key={range.id} onClick={() => setTimeRange(range.id)} className={`px-2 sm:px-3 py-1 text-xs font-semibold rounded-md transition-colors ${timeRange === range.id ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>{range.label}</button>
                     ))}
                 </div>
             </div>
@@ -402,9 +402,9 @@ const ExpenseAnalysisPanel: React.FC<{
         <Card className="h-full flex flex-col" onMouseLeave={() => setHoveredCategory(null)}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
                 <h3 className="text-lg font-bold">Análise de Despesas</h3>
-                <div className="flex space-x-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg self-end sm:self-center overflow-x-auto no-scrollbar">
+                <div className="grid grid-cols-3 gap-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg self-end sm:self-center">
                     {timeRanges.map(range => (
-                        <button key={range.id} onClick={() => { setTimeRange(range.id); setSelectedCategory(null); }} className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${timeRange === range.id ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>{range.label}</button>
+                        <button key={range.id} onClick={() => { setTimeRange(range.id); setSelectedCategory(null); }} className={`px-2 sm:px-3 py-1 text-xs font-semibold rounded-md transition-colors ${timeRange === range.id ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>{range.label}</button>
                     ))}
                 </div>
             </div>
@@ -678,15 +678,15 @@ const DashboardPage: React.FC = () => {
                             <h2 className="text-lg font-bold">{config.objetivo_label}</h2>
                             <p className="text-3xl font-extrabold tracking-tight">{formatCurrency(currentPatrimonio)}</p>
                         </div>
-                        <div className="flex space-x-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg overflow-x-auto no-scrollbar">
+                        <div className="grid grid-cols-4 gap-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg">
                             {(['3M', '6M', '1Y', 'Max'] as TimeRange[]).map(range => (
-                                <button key={range} onClick={() => setTimeRange(range)} className={`px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-colors ${timeRange === range ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>
+                                <button key={range} onClick={() => setTimeRange(range)} className={`px-2 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-colors ${timeRange === range ? 'bg-white dark:bg-neutral-600 text-black dark:text-white shadow-sm' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}>
                                     {range}
                                 </button>
                             ))}
                         </div>
                     </div>
-                    <div className="h-60 -mx-6 sm:mx-0">
+                    <div className="h-60 -mx-4 sm:mx-0">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 5 }}>
                                 <defs>

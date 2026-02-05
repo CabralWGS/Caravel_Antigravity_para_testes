@@ -125,8 +125,8 @@ const ThemeSelector: React.FC<{ theme: Theme; setTheme: (theme: Theme) => void }
                         key={option.value}
                         onClick={() => setTheme(option.value)}
                         className={`w-full py-2 px-3 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500 dark:focus-visible:ring-offset-neutral-900 ${theme === option.value
-                                ? 'bg-white shadow-sm dark:bg-neutral-700 text-black dark:text-white'
-                                : 'text-neutral-600 dark:text-neutral-300 hover:bg-white/60 dark:hover:bg-neutral-700/60'
+                            ? 'bg-white shadow-sm dark:bg-neutral-700 text-black dark:text-white'
+                            : 'text-neutral-600 dark:text-neutral-300 hover:bg-white/60 dark:hover:bg-neutral-700/60'
                             }`}
                     >
                         {option.label}
@@ -430,14 +430,14 @@ const SettingsPage: React.FC = () => {
         <>
             <div className="space-y-8 animate-fade-in-scale">
                 <div className="space-y-2">
-                    <nav className="flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-x-auto no-scrollbar">
+                    <nav className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-800">
                         {tabs.map(tab => (
                             <button
                                 key={tab.id}
                                 onClick={() => dispatch({ type: 'SET_ACTIVE_TAB', payload: tab.id })}
-                                className={`flex-1 group flex items-center justify-center gap-1.5 py-2 px-2 sm:px-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500 dark:focus-visible:ring-offset-black ${state.activeTab === tab.id
-                                        ? 'bg-white shadow-sm dark:bg-neutral-700 text-black dark:text-white'
-                                        : 'text-neutral-500 dark:text-neutral-400 hover:bg-white/60 dark:hover:bg-neutral-700/60'
+                                className={`flex-1 group flex items-center justify-center gap-1.5 py-3 sm:py-2 px-2 sm:px-3 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500 dark:focus-visible:ring-offset-black ${state.activeTab === tab.id
+                                    ? 'bg-white shadow-sm dark:bg-neutral-700 text-black dark:text-white'
+                                    : 'text-neutral-500 dark:text-neutral-400 hover:bg-white/60 dark:hover:bg-neutral-700/60'
                                     }`}
                                 aria-current={state.activeTab === tab.id ? 'page' : undefined}
                             >
@@ -446,7 +446,7 @@ const SettingsPage: React.FC = () => {
                             </button>
                         ))}
                     </nav>
-                    <div className="w-full bg-neutral-200 dark:bg-neutral-800 rounded-full h-1 relative">
+                    <div className="hidden sm:block w-full bg-neutral-200 dark:bg-neutral-800 rounded-full h-1 relative">
                         <div
                             className="absolute top-0 h-1 rounded-full bg-black dark:bg-white transition-all duration-300 ease-out"
                             style={{

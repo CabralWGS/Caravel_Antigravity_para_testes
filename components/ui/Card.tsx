@@ -11,7 +11,7 @@ export const Card: React.FC<CardProps> = ({ children, className = '', ...props }
   return (
     <div
       className={`
-        p-6
+        p-4 sm:p-6
         bg-white dark:bg-surface
         border border-neutral-100 dark:border-neutral-800/50
         rounded-xl
