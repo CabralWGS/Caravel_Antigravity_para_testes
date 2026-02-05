@@ -3,7 +3,7 @@ import React from 'react';
 import { AreaChart, Area, ResponsiveContainer, Tooltip as RechartsTooltip, ReferenceLine, PieChart, Pie, Cell, Sector } from 'recharts';
 import { Card } from '../ui/Card.tsx';
 import { Link } from 'react-router-dom';
-import { Plus, TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight, Minus, Lock, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight, Activity, CalendarDays, Compass, Anchor, Wind, Waves, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Plus, TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight, Minus, Lock, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight, Activity, CalendarDays, Compass, Anchor, Wind, Waves, ArrowRight, ArrowLeft, CheckCircle as CheckCircleIcon } from 'lucide-react';
 import { useAppContext } from '../../context/AppContext.tsx';
 import { CustomChartTooltip } from '../ui/CustomChartTooltip.tsx';
 import { useFinancialSummary } from '../../hooks/useFinancialSummary.ts';
@@ -765,33 +765,46 @@ const DashboardPage: React.FC = () => {
                 {financialSummary ? (
                     <Card className="flex flex-col gap-6">
                         {/* Header */}
-                        <div className="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-neutral-800">
-                            <div className="flex items-center gap-3">
-                                <button
-                                    onClick={() => navigateCompass('prev')}
-                                    className="p-1.5 text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
-                                >
-                                    <ChevronLeft className="h-5 w-5" />
-                                </button>
-                                <h3 className="font-bold whitespace-nowrap flex items-center gap-2 text-lg">
-                                    <Compass className="h-5 w-5" />
-                                    <span>Bússola: {formatMonthYear(financialSummary.monthAnalyzed)}</span>
-                                </h3>
-                                <button
-                                    onClick={() => navigateCompass('next')}
-                                    className="p-1.5 text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
-                                >
-                                    <ChevronRight className="h-5 w-5" />
-                                </button>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-neutral-100 dark:border-neutral-800 gap-3">
+                            <div className="flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        onClick={() => navigateCompass('prev')}
+                                        className="p-1.5 text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
+                                    >
+                                        <ChevronLeft className="h-5 w-5" />
+                                    </button>
+                                    <h3 className="font-bold flex items-center gap-2 text-lg truncate">
+                                        <Compass className="h-5 w-5 flex-shrink-0" />
+                                        <span className="truncate">Bússola: {formatMonthYear(financialSummary.monthAnalyzed)}</span>
+                                    </h3>
+                                    <button
+                                        onClick={() => navigateCompass('next')}
+                                        className="p-1.5 text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
+                                    >
+                                        <ChevronRight className="h-5 w-5" />
+                                    </button>
+                                </div>
+                                {financialSummary.isOngoing ? (
+                                    <div className="sm:hidden flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-bold rounded-full animate-pulse border border-blue-100 dark:border-blue-900/30">
+                                        <Activity className="h-3 w-3" />
+                                        <span>Em Curso</span>
+                                    </div>
+                                ) : (
+                                    <div className="sm:hidden flex items-center gap-1.5 px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-xs font-bold rounded-full">
+                                        <CheckCircleIcon className="h-3 w-3" />
+                                        <span>Fechado</span>
+                                    </div>
+                                )}
                             </div>
                             {financialSummary.isOngoing ? (
-                                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-bold rounded-full animate-pulse border border-blue-100 dark:border-blue-900/30">
+                                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-bold rounded-full animate-pulse border border-blue-100 dark:border-blue-900/30">
                                     <Activity className="h-3 w-3" />
                                     <span>Em Curso</span>
                                 </div>
                             ) : (
                                 <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-xs font-bold rounded-full">
-                                    <CheckCircle className="h-3 w-3" />
+                                    <CheckCircleIcon className="h-3 w-3" />
                                     <span>Fechado</span>
                                 </div>
                             )}
