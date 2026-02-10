@@ -6,15 +6,20 @@ import { ArrowLeft, User } from 'lucide-react';
 import { blogPostsData, BlogPost } from '../../data/blogPosts.ts';
 
 const BlogHeader: React.FC = () => (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <header className="fixed top-0 left-0 right-0 z-50 py-3 bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-sm shadow-neutral-200/20 dark:shadow-black/30 border-b border-neutral-200/50 dark:border-neutral-800/50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <Link to="/" aria-label="Voltar à página inicial" title="Caravel - Gestão Financeira Pessoal">
-                <Logo variant="full" className="h-20" />
+                <Logo variant="full" className="h-14" />
             </Link>
-            <nav className="flex items-center gap-6">
-                <Link to="/blog" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Blog</Link>
-                <Link to="/login" className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors">Entrar</Link>
+            <nav className="hidden md:flex items-center gap-8">
+                <Link to="/#funcionalidades" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Funcionalidades</Link>
+                <Link to="/#precos" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Preços</Link>
+                <Link to="/blog" className="text-sm font-medium text-black dark:text-white transition-colors">Blog</Link>
             </nav>
+            <div className="flex items-center gap-4">
+                <Link to="/login" className="hidden md:inline text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Entrar</Link>
+                <Link to="/login?view=signup" className="px-5 py-2.5 text-sm font-semibold bg-black dark:bg-white text-white dark:text-black rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors">Começar Grátis</Link>
+            </div>
         </div>
     </header>
 );
@@ -148,11 +153,44 @@ const BlogPostPage: React.FC = () => {
                             let currentList: string[] = [];
                             let listType: 'ul' | 'ol' | null = null;
 
-                            const parseInline = (text: string) => {
-                                const parts = text.split(/(\*\*[^*]+\*\*)/);
-                                return parts.map((part, j) =>
-                                    part.startsWith('**') ? <strong key={j}>{part.replace(/\*\*/g, '')}</strong> : part
-                                );
+                            const parseInline = (text: string): React.ReactNode[] => {
+                                // Parse links [text](url), bold **text**, and italics *text*
+                                const tokens: React.ReactNode[] = [];
+                                const regex = /(\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*)/g;
+                                let lastIndex = 0;
+                                let match;
+
+                                while ((match = regex.exec(text)) !== null) {
+                                    // Add text before this match
+                                    if (match.index > lastIndex) {
+                                        tokens.push(text.slice(lastIndex, match.index));
+                                    }
+
+                                    if (match[2] && match[3]) {
+                                        // Link: [text](url)
+                                        const isExternal = match[3].startsWith('http');
+                                        tokens.push(
+                                            <a key={`link-${match.index}`} href={match[3]} className="text-accent hover:underline" {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                                                {match[2]}
+                                            </a>
+                                        );
+                                    } else if (match[4]) {
+                                        // Bold: **text**
+                                        tokens.push(<strong key={`bold-${match.index}`}>{match[4]}</strong>);
+                                    } else if (match[5]) {
+                                        // Italic: *text*
+                                        tokens.push(<em key={`em-${match.index}`} className="text-neutral-500 dark:text-neutral-400">{match[5]}</em>);
+                                    }
+
+                                    lastIndex = match.index + match[0].length;
+                                }
+
+                                // Add remaining text
+                                if (lastIndex < text.length) {
+                                    tokens.push(text.slice(lastIndex));
+                                }
+
+                                return tokens.length > 0 ? tokens : [text];
                             };
 
                             const flushList = () => {
@@ -206,15 +244,31 @@ const BlogPostPage: React.FC = () => {
                                 flushList();
 
                                 if (line.startsWith('## ')) {
-                                    elements.push(<h2 key={i}>{line.replace('## ', '')}</h2>);
+                                    elements.push(
+                                        <h2 key={i} style={{ marginTop: '3rem', marginBottom: '1rem', fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.3 }}>
+                                            {line.replace('## ', '')}
+                                        </h2>
+                                    );
                                 } else if (line.startsWith('### ')) {
-                                    elements.push(<h3 key={i}>{line.replace('### ', '')}</h3>);
+                                    elements.push(
+                                        <h3 key={i} style={{ marginTop: '2rem', marginBottom: '0.75rem', fontSize: '1.35rem', fontWeight: 600, lineHeight: 1.4 }}>
+                                            {line.replace('### ', '')}
+                                        </h3>
+                                    );
                                 } else if (line.startsWith('---')) {
-                                    elements.push(<hr key={i} />);
+                                    elements.push(<hr key={i} style={{ margin: '2.5rem 0', borderColor: 'rgba(128,128,128,0.2)' }} />);
                                 } else if (line.startsWith('> ')) {
-                                    elements.push(<blockquote key={i}><p>{parseInline(line.replace('> ', ''))}</p></blockquote>);
+                                    elements.push(
+                                        <blockquote key={i}>
+                                            <p>{parseInline(line.replace('> ', ''))}</p>
+                                        </blockquote>
+                                    );
                                 } else if (line.trim() !== '') {
-                                    elements.push(<p key={i}>{parseInline(line)}</p>);
+                                    elements.push(
+                                        <p key={i} style={{ marginBottom: '1.25rem', lineHeight: 1.8 }}>
+                                            {parseInline(line)}
+                                        </p>
+                                    );
                                 }
                             });
 

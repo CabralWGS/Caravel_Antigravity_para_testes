@@ -27,12 +27,139 @@ export const allTags = [
     'mercados emergentes',
     'irs',
     'impostos',
+    'reforma',
 ] as const;
 
 export type BlogTag = typeof allTags[number];
 
 // Blog posts with full content
 export const blogPostsData: Record<string, BlogPost> = {
+    'ppr-2026-guia': {
+        slug: 'ppr-2026-guia',
+        title: 'PPR em 2026: Quanto Rende e Como Deduzir no IRS',
+        description: 'Descobre como funciona o PPR em Portugal, quanto rende em 2026 e como maximizar a dedução fiscal até €400.',
+        date: '2026-02-10',
+        readTime: '6 min',
+        author: 'Caravel Team',
+        tags: ['poupança', 'investimentos', 'irs', 'portugal', 'reforma'],
+        thumbnail: '/blog/ppr-2026-guia.webp',
+        content: `
+## O Que É um PPR e Quanto Rende em 2026?
+
+Um Plano Poupança Reforma (PPR) é um instrumento financeiro desenhado para construir uma reserva de longo prazo para a reforma. Em 2026, os melhores Seguros PPR com capital garantido oferecem taxas entre **2,00% e 2,20%** de rentabilidade mínima, enquanto os Fundos PPR — sem garantia de capital — têm registado rendimentos médios de **3,53% a 3,95%** ao ano.
+
+Mais do que rentabilidade, o PPR destaca-se pelo **benefício fiscal**: podes deduzir até **€400 por ano no IRS**, dependendo da tua idade. É uma das poucas ferramentas onde o Estado te recompensa diretamente por poupares.
+
+> O PPR não é apenas um produto financeiro — é uma decisão estratégica de longo prazo.
+
+---
+
+## Seguros PPR vs Fundos PPR: Qual Escolher?
+
+Existem dois tipos principais de PPR, e a escolha depende do teu perfil de risco:
+
+### Seguros PPR (Capital Garantido)
+
+- **Risco:** Baixo — o capital investido está protegido
+- **Rentabilidade 2026:** 2,00% a 2,20% (garantida)
+- **Ideal para:** Perfis conservadores, proximidade da reforma
+- **Exemplos:** PRÉVOIR PPR (2,20%), BPI Garantia Extra (2,00%)
+
+### Fundos PPR (Sem Garantia de Capital)
+
+- **Risco:** Médio a alto — investem nos mercados financeiros
+- **Rentabilidade média:** 3,53% a 3,95% (histórica, não garantida)
+- **Ideal para:** Perfis moderados/dinâmicos, jovens com horizonte longo
+- **Vantagem:** Potencial de retorno superior a longo prazo
+
+**Regra de ouro:** Quanto mais longe estiveres da reforma, mais podes beneficiar de um Fundo PPR. Quanto mais perto, mais faz sentido proteger o capital num Seguro PPR.
+
+---
+
+## Benefícios Fiscais PPR em 2026
+
+O grande trunfo do PPR é a **dedução à coleta do IRS**. Podes deduzir 20% do valor investido, com os seguintes limites:
+
+- **Até 35 anos:** dedução máxima de €400/ano (entrega de €2.000)
+- **Entre 35 e 50 anos:** dedução máxima de €350/ano (entrega de €1.750)
+- **Mais de 50 anos:** dedução máxima de €300/ano (entrega de €1.500)
+
+### Como Funciona na Prática?
+
+Se tens 30 anos e investires **€2.000** num PPR durante 2026, recebes **€400 de volta** no reembolso do IRS de 2027. Isto equivale a um retorno imediato de 20% — antes sequer de considerar a rentabilidade do produto.
+
+> Poucos instrumentos financeiros te dão 20% de retorno garantido no primeiro ano. O PPR é um deles.
+
+---
+
+## Como Escolher o Melhor PPR? (Passo a Passo)
+
+### 1. Define o Teu Perfil de Risco
+
+Pergunta-te: quanto tempo falta para a reforma? Se faltam mais de 20 anos, podes tolerar mais risco. Se faltam menos de 10, prioriza capital garantido.
+
+### 2. Compara Comissões (Atenção!)
+
+As comissões são o maior inimigo silencioso do PPR. Alguns produtos cobram comissões que consomem **30% a 40% da rentabilidade**. Procura PPRs com:
+
+- **Comissão de gestão:** inferior a 1,5% ao ano
+- **Comissão de subscrição:** idealmente 0%
+- **Comissão de resgate:** verifica as condições de saída antecipada
+
+### 3. Usa os Comparadores Oficiais
+
+- **Comparador ASF** — Para Seguros PPR com capital garantido
+- **Comparador CMVM** — Para Fundos PPR de investimento
+- **Relatórios APFIPP** — Dados de rentabilidade histórica
+
+### 4. Automatiza as Entregas
+
+Muitos PPRs permitem entregas mensais a partir de **€25**. Automatizar este valor no dia do salário é a forma mais eficaz de construir poupança sem esforço.
+
+---
+
+## Armadilhas a Evitar
+
+O PPR tem vantagens claras, mas não está isento de riscos:
+
+- **Resgates antecipados:** Fora das condições legais (reforma, desemprego, doença grave, crédito habitação), o resgate implica a **devolução dos benefícios fiscais** mais penalização
+- **Comissões ocultas:** Lê sempre o Documento de Informação Fundamental (DIF) antes de subscrever
+- **Ilusão de garantia:** Nos Fundos PPR, a rentabilidade histórica não garante resultados futuros
+- **Concentração excessiva:** O PPR deve ser parte de uma estratégia diversificada, não a tua única poupança
+
+---
+
+## Conclusão
+
+O PPR continua a ser um dos instrumentos mais inteligentes para quem quer poupar para a reforma em Portugal. Com benefícios fiscais imediatos de até €400 e opções para todos os perfis de risco, é uma peça fundamental em qualquer estratégia financeira organizada.
+
+O primeiro passo é simples: define quanto podes investir mensalmente e compara as opções disponíveis. Assumir o leme das finanças significa planear hoje o que vais colher amanhã.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
+        `,
+        faq: [
+            {
+                question: 'O que é um PPR?',
+                answer: 'Um Plano Poupança Reforma (PPR) é um produto financeiro de longo prazo desenhado para complementar a reforma. Pode ser um Seguro PPR (com capital garantido) ou um Fundo PPR (investido nos mercados, sem garantia de capital).'
+            },
+            {
+                question: 'Quanto posso deduzir no IRS com um PPR?',
+                answer: 'Podes deduzir 20% do valor investido, até um máximo de €400/ano (até 35 anos), €350/ano (35-50 anos) ou €300/ano (mais de 50 anos).'
+            },
+            {
+                question: 'Posso resgatar o PPR antes da reforma?',
+                answer: 'Sim, mas fora das condições legais (reforma, desemprego de longa duração, doença grave, pagamento de crédito habitação), terás de devolver os benefícios fiscais obtidos, acrescidos de uma penalização.'
+            },
+            {
+                question: 'Qual a diferença entre Seguro PPR e Fundo PPR?',
+                answer: 'O Seguro PPR garante o capital investido e oferece uma taxa mínima (2-2,2% em 2026). O Fundo PPR investe nos mercados financeiros sem garantia de capital, mas com potencial de retorno superior a longo prazo (média histórica de 3,5-4%).'
+            }
+        ]
+    },
     'guia-irs-2026': {
         slug: 'guia-irs-2026',
         title: 'IRS 2026: Guia Completo com Datas e Novos Escalões',
@@ -103,6 +230,8 @@ O IRS não tem de ser um monstro marinho. Com organização antecipada e conheci
 
 Assome o leme hoje: entra no Portal das Finanças e valida as tuas primeiras faturas. A tua expedição para um reembolso maior começa agora.
 
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
 ---
 
 *A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
@@ -119,6 +248,14 @@ Assome o leme hoje: entra no Portal das Finanças e valida as tuas primeiras fat
             {
                 question: 'O que acontece se não validar as faturas?',
                 answer: 'Se não validares, as despesas podem não ser consideradas para efeitos de dedução à coleta, resultando num reembolso menor ou mais imposto a pagar.'
+            },
+            {
+                question: 'Como funciona o IRS automático?',
+                answer: 'O IRS automático é uma declaração pré-preenchida pela AT para contribuintes com rendimentos simples (categoria A e/ou H). Se os dados estiverem corretos, basta confirmar. No entanto, revê sempre antes de aceitar.'
+            },
+            {
+                question: 'Que despesas posso deduzir no IRS?',
+                answer: 'Podes deduzir despesas de saúde (15%), educação (30%), habitação (15% de rendas), lares (25%) e despesas gerais familiares (35% até €250). As percentagens referem-se à dedução sobre o montante gasto.'
             }
         ]
     },
@@ -134,7 +271,7 @@ Assome o leme hoje: entra no Portal das Finanças e valida as tuas primeiras fat
         content: `
 ## Porque É Que a Literacia Financeira É Essencial?
 
-A realidade é clara: quem não compreende como o dinheiro funciona, acaba por ser controlado por ele. Em contrapartida, quem domina os princípios básicos da gestão financeira conquista:
+A realidade é clara: quem não compreende como o dinheiro funciona, acaba por ser controlado por ele. Segundo o Banco de Portugal, apenas **27% dos portugueses** demonstram conhecimentos financeiros adequados — um dos valores mais baixos da Europa. Em contrapartida, quem domina os princípios básicos da gestão financeira conquista:
 
 - **Autonomia** — Tomas decisões sem depender de terceiros
 - **Segurança** — Constróis uma reserva de emergência sólida
@@ -225,6 +362,12 @@ A literacia financeira não exige um MBA. Exige apenas três coisas:
 A tua expedição financeira começa com uma decisão: deixar de ser passageiro e passar a ser capitão.
 
 Se procuras uma ferramenta que te ajude a organizar as tuas finanças com total privacidade e controlo manual, sem algoritmos a decidir por ti — a Caravel foi desenhada exatamente para isso.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
         `,
         faq: [
             {
@@ -254,73 +397,112 @@ Se procuras uma ferramenta que te ajude a organizar as tuas finanças com total 
         title: 'Como Criar um Orçamento Pessoal em 5 Passos Simples',
         description: 'Aprende a criar um orçamento mensal eficaz em apenas 5 passos. Guia prático para começares a controlar as tuas finanças hoje.',
         date: '2025-02-03',
-        readTime: '5 min',
+        readTime: '6 min',
         author: 'Caravel Team',
         tags: ['orçamento', 'finanças pessoais', 'poupança'],
         thumbnail: '/blog/orcamento-pessoal.webp',
         content: `
-## Porque precisas de um orçamento?
+## Porque Precisas de um Orçamento?
 
-Um orçamento é a ferramenta mais poderosa para atingir estabilidade financeira. Segundo estudos recentes, **67% dos portugueses não têm um orçamento definido**, o que leva a gastos impulsivos e dificuldade em poupar.
+Um orçamento pessoal é a ferramenta mais eficaz para tomar o controlo das tuas finanças. Permite-te saber exatamente para onde vai cada euro, identificar gastos desnecessários e criar margem para poupar. Segundo dados recentes, **67% dos portugueses não têm um orçamento definido** — e é precisamente por isso que tantas famílias chegam ao fim do mês sem saber onde foi o dinheiro.
 
-Ter um orçamento permite-te:
-- Saber exatamente para onde vai o teu dinheiro
-- Identificar gastos desnecessários
-- Criar uma almofada financeira
-- Alcançar objetivos de poupança
+A boa notícia: criar um orçamento não é complicado. Em 5 passos, consegues montar um sistema que te dá clareza e controlo.
+
+> Quem não sabe para onde vai o dinheiro nunca vai ter o suficiente. O orçamento não é uma restrição — é um mapa.
 
 ---
 
-## Como Criar um Orçamento? (Passo a Passo)
+## Os 5 Passos para Criar o Teu Orçamento
 
-### Passo 1: Calcula os Teus Rendimentos
+### Passo 1: Calcula os Teus Rendimentos Líquidos
 
-Lista todos os teus rendimentos mensais líquidos. Inclui:
-- Salário
-- Rendimentos extra (freelance, investimentos)
-- Subsídios ou outros
+Lista todos os rendimentos mensais após impostos:
 
-**Dica:** Usa o valor líquido (após impostos) para maior precisão.
+- Salário líquido
+- Rendimentos extra (freelance, part-time, investimentos)
+- Subsídios ou outros apoios recorrentes
+
+**Dica:** Usa sempre o valor líquido (após IRS e Segurança Social). Se tens rendimentos variáveis, usa a média dos últimos 3 a 6 meses.
 
 ### Passo 2: Lista as Despesas Fixas
 
-Identifica gastos que não variam muito de mês para mês:
-- Renda/prestação da casa
-- Seguros
-- Subscrições (Netflix, Spotify, etc.)
-- Transportes
+Identifica gastos que se repetem todos os meses com valor previsível:
+
+- Renda ou prestação da casa
+- Seguros (saúde, automóvel, vida)
+- Subscrições (Netflix, Spotify, ginásio)
+- Telecomunicações (internet, telemóvel)
+- Transportes (passe, combustível, portagens)
 
 ### Passo 3: Estima as Despesas Variáveis
 
 Estes são os gastos que podes controlar mais facilmente:
-- Alimentação
+
+- Alimentação e supermercado
 - Lazer e entretenimento
-- Compras diversas
-- Restaurantes
+- Restaurantes e cafés
+- Compras diversas (roupa, eletrónica)
+- Cuidados pessoais
+
+**Dica:** Revê os extratos dos últimos 3 meses para teres uma base realista. A maioria das pessoas subestima os gastos variáveis em **20 a 30%**.
 
 ### Passo 4: Define Metas de Poupança
 
-A regra 50/30/20 sugere:
-- **50%** para necessidades
-- **30%** para desejos
-- **20%** para poupança
+A regra 50/30/20 é um bom ponto de partida:
 
-Ajusta conforme a tua situação.
+- **50%** para necessidades (renda, alimentação, contas)
+- **30%** para desejos (lazer, restaurantes, compras)
+- **20%** para poupança e investimento
+
+Ajusta conforme a tua realidade. Em Portugal, com o custo de habitação a absorver frequentemente mais de 35% do rendimento, a divisão pode precisar de ajustes — e tudo bem. O importante é que exista uma meta de poupança, mesmo que comece nos 10%.
 
 ### Passo 5: Revê e Ajusta Mensalmente
 
-Um orçamento não é estático. Revê-o todos os meses para:
-- Identificar onde gastaste demais
-- Ajustar limites se necessário
-- Celebrar progressos
+Um orçamento não é um documento estático — é uma ferramenta viva. Todos os meses:
+
+- Compara o que planeaste com o que gastaste
+- Identifica onde ultrapassaste os limites
+- Ajusta categorias se necessário
+- Celebra os progressos (a motivação importa)
+
+> O orçamento perfeito não existe ao primeiro mês. Existe ao terceiro, quando já conheces os teus padrões e os ajustas com inteligência.
+
+---
+
+## Erros Comuns que Sabotam o Orçamento
+
+Criar o orçamento é o primeiro passo. Mantê-lo é o desafio. Evita estes erros:
+
+- **Ser demasiado restritivo:** Um orçamento que não inclui lazer é um orçamento que vais abandonar. Sê realista.
+- **Esquecer despesas anuais:** Seguros, IMI, IUC, manutenção do carro. Divide o valor anual por 12 e inclui no orçamento mensal.
+- **Não registar pequenos gastos:** Cafés, snacks, compras por impulso. Parecem irrelevantes, mas podem somar €100-200/mês.
+- **Desistir após um mês mau:** Todos os meses têm imprevistos. Um mês acima do orçamento não é um fracasso — é informação para ajustar.
+
+---
+
+## Ferramentas para Gerir o Orçamento
+
+A melhor ferramenta é aquela que usas consistentemente:
+
+- **Caderno e caneta:** Simples, sem distrações. Funciona para quem prefere o analógico.
+- **Folha de cálculo:** Excel ou Google Sheets dão total personalização. Requerem mais esforço inicial.
+- **Apps de gestão financeira:** A forma mais visual e rápida. Procura apps que respeitem a tua privacidade e te dêem controlo manual.
+
+O mais importante não é a ferramenta — é o hábito. Dedica 10 minutos por semana a registar e rever. Com consistência, os resultados aparecem em poucas semanas.
 
 ---
 
 ## Conclusão
 
-Criar um orçamento é o primeiro passo para dominar as tuas finanças. Não precisa de ser complicado – começa pelos 5 passos acima e ajusta conforme necessário. Com consistência, verás resultados em poucas semanas.
+Criar um orçamento é o primeiro passo para dominar as tuas finanças. Não precisa de ser perfeito — precisa de existir. Os 5 passos acima dão-te uma estrutura sólida para começar, e o tempo vai encarregar-se de a refinar.
 
-**Pronto para começar?** A Caravel ajuda-te a manter o controlo com um dashboard simples, manual e 100% privado.
+O segredo está na consistência: quem revê o orçamento todos os meses poupa em média **mais 15 a 20%** do que quem não o faz. Começa hoje, mesmo que simples.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
     `,
         faq: [
             {
@@ -329,67 +511,136 @@ Criar um orçamento é o primeiro passo para dominar as tuas finanças. Não pre
             },
             {
                 question: 'Devo usar uma app ou folha de cálculo?',
-                answer: 'Ambos funcionam. Apps como a Caravel oferecem uma experiência mais visual e privada. Folhas de cálculo são mais personalizáveis mas requerem mais esforço.'
+                answer: 'Ambos funcionam. Apps oferecem uma experiência mais visual e rápida. Folhas de cálculo são mais personalizáveis mas requerem mais esforço. O mais importante é a consistência.'
             },
             {
                 question: 'E se os meus rendimentos forem variáveis?',
                 answer: 'Usa a média dos últimos 3-6 meses como base. Nos meses de rendimento acima da média, direciona o extra para poupança ou fundo de emergência.'
+            },
+            {
+                question: 'A regra 50/30/20 funciona em Portugal?',
+                answer: 'É um bom ponto de partida, mas pode precisar de ajustes. Com o custo de habitação elevado em cidades como Lisboa e Porto, a parcela de necessidades pode ultrapassar 50%. Ajusta as proporções à tua realidade.'
+            },
+            {
+                question: 'Como lidar com despesas imprevistas no orçamento?',
+                answer: 'Inclui uma categoria de "imprevistos" no orçamento (5-10% do rendimento). Para despesas maiores, recorre ao fundo de emergência. O importante é que o imprevisto não destrua o plano.'
             }
         ]
     },
     'fundo-emergencia-quanto-poupar': {
         slug: 'fundo-emergencia-quanto-poupar',
         title: 'Fundo de Emergência: Quanto Deves Poupar?',
-        description: 'Descobre quanto deves ter no teu fundo de emergência e como construí-lo passo a passo.',
+        description: 'Descobre quanto deves ter no teu fundo de emergência e como construí-lo passo a passo. Guia completo com valores para Portugal.',
         date: '2025-02-01',
-        readTime: '4 min',
+        readTime: '5 min',
         author: 'Caravel Team',
         tags: ['poupança', 'fundo emergência', 'finanças pessoais'],
         thumbnail: '/blog/fundo-emergencia.webp',
         content: `
-## O que é um Fundo de Emergência?
+## Quanto Deves Ter no Fundo de Emergência?
 
-Um fundo de emergência é dinheiro reservado para imprevistos – despesas médicas, reparações urgentes, ou perda de emprego. Não é para férias nem compras planeadas.
+Deves ter entre **3 a 6 meses de despesas essenciais** reservados para imprevistos. Para uma família portuguesa com despesas mensais de €1.500, isso significa entre **€4.500 e €9.000**. Se és freelancer ou tens rendimentos variáveis, o ideal sobe para **9 a 12 meses** — entre €13.500 e €18.000.
 
----
+Este dinheiro não é para férias, compras planeadas ou investimentos. É a tua âncora financeira: o que te impede de recorrer a crédito quando o inesperado acontece.
 
-## Quanto Deves Poupar?
-
-A regra geral é:
-- **Mínimo:** 3 meses de despesas
-- **Ideal:** 6 meses de despesas
-- **Se és freelancer:** 9-12 meses
-
-### Como Calcular
-
-1. Soma as tuas despesas essenciais mensais (renda, alimentação, contas, transportes)
-2. Multiplica por 3 a 6
-
-**Exemplo:** Se gastas €1.500/mês em essenciais, precisas de €4.500 a €9.000.
+> Segundo o Banco de Portugal, cerca de 40% das famílias portuguesas não conseguiriam cobrir uma despesa inesperada de €1.000 sem recorrer a crédito. O fundo de emergência existe para que não sejas uma delas.
 
 ---
 
-## Como Construir o Fundo
+## Porque Precisas de Um? (Os Números Falam)
 
-1. **Define um objetivo inicial** - Começa com €1.000
-2. **Automatiza** - Transfere um valor fixo no início do mês
-3. **Guarda em conta separada** - Dificulta o acesso para evitar tentações
-4. **Aumenta gradualmente** - Quando atingires €1.000, aumenta para 3 meses
+A vida não avisa. Eis os imprevistos mais comuns e os seus custos médios em Portugal:
+
+- **Reparação automóvel:** €300 a €2.000
+- **Avaria doméstica (caldeira, eletrodoméstico):** €200 a €800
+- **Despesas médicas não cobertas:** €100 a €1.500
+- **Perda de emprego:** 3 a 6 meses sem rendimento
+
+Sem reserva, qualquer destes cenários obriga-te a recorrer a cartões de crédito ou crédito pessoal — com juros que agravam o problema. Com um fundo de emergência, absorves o impacto sem comprometer o resto das tuas finanças.
+
+---
+
+## Como Calcular o Teu Valor Ideal
+
+### Passo 1: Soma as Despesas Essenciais Mensais
+
+Inclui apenas o indispensável:
+- Renda ou prestação da casa
+- Alimentação
+- Contas fixas (água, luz, gás, internet, telecomunicações)
+- Transportes
+- Seguros obrigatórios
+
+### Passo 2: Multiplica pelo Teu Fator de Segurança
+
+- **Trabalho estável por conta de outrem:** multiplica por 3 a 4
+- **Contrato a prazo ou setor instável:** multiplica por 5 a 6
+- **Freelancer ou rendimento variável:** multiplica por 9 a 12
+
+**Exemplo concreto:** Se as tuas despesas essenciais são €1.200/mês e trabalhas por conta de outrem com contrato efetivo, o teu fundo ideal é de **€3.600 a €4.800**.
+
+---
+
+## Como Construir o Fundo (Passo a Passo)
+
+1. **Define um primeiro objetivo:** Começa com €1.000. Este valor cobre a maioria dos imprevistos menores e dá-te confiança para continuar.
+2. **Automatiza a poupança:** Configura uma transferência automática no dia do salário. Mesmo €50 ou €100 por mês fazem diferença — a consistência vence a velocidade.
+3. **Separa o dinheiro:** Guarda numa conta diferente da conta corrente. Se o dinheiro estiver acessível, vais gastá-lo.
+4. **Aumenta gradualmente:** Quando atingires €1.000, define o próximo objetivo (3 meses). Quando atingires 3 meses, avança para 6.
+
+> O segredo não é poupar muito de uma vez — é poupar pouco, mas sempre. €100/mês são €1.200 em um ano e €6.000 em cinco.
+
+---
+
+## Onde Guardar o Fundo de Emergência
+
+O fundo de emergência não é para investir — é para estar disponível. As melhores opções em Portugal:
+
+- **Conta poupança separada:** A opção mais simples. Rentabilidade baixa (~0,5-1%), mas acesso imediato.
+- **Depósito a prazo com mobilização antecipada:** Melhor taxa (~1,5-2%), mas confirma que podes levantar sem penalização severa.
+- **Certificados de Aforro (série F):** Boa rentabilidade (~2,5%), mobilização após 3 meses. Ideal para a parte do fundo que não precisas no imediato.
+
+**Evita:** Ações, fundos de investimento, criptomoedas, ou qualquer ativo volátil. O objetivo é segurança, não rentabilidade.
+
+---
+
+## Erros Comuns a Evitar
+
+- **Não começar por achar que "não dá":** €50/mês já é um fundo de emergência em construção. Começar é mais importante que o valor.
+- **Usar o fundo para "oportunidades":** Promoções, viagens ou investimentos não são emergências. Cria objetivos separados para estes.
+- **Guardar na conta corrente:** Se o dinheiro não está separado, vai desaparecer nos gastos do dia-a-dia.
+- **Parar depois de atingir o objetivo:** A inflação erode o valor. Revê o teu fundo anualmente e ajusta às tuas despesas atuais.
 
 ---
 
 ## Conclusão
 
-Um fundo de emergência dá-te paz de espírito e liberdade financeira. Começa pequeno, mas começa hoje.
+O fundo de emergência é a base de qualquer estratégia financeira sólida. Sem ele, qualquer imprevisto pode deitar abaixo meses de progresso. Com ele, navegas com a tranquilidade de quem sabe que está preparado.
+
+O primeiro passo é simples: abre uma conta separada e configura uma transferência automática, mesmo que pequena. O teu futuro eu vai agradecer-te.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
     `,
         faq: [
             {
+                question: 'Quanto devo ter no fundo de emergência?',
+                answer: 'Entre 3 a 6 meses de despesas essenciais. Para uma família com €1.500/mês de despesas, isso significa €4.500 a €9.000. Freelancers devem guardar 9 a 12 meses.'
+            },
+            {
                 question: 'Onde devo guardar o fundo de emergência?',
-                answer: 'Numa conta poupança de fácil acesso mas separada da conta corrente. Evita investimentos voláteis – o objetivo é segurança, não rentabilidade.'
+                answer: 'Numa conta poupança de fácil acesso mas separada da conta corrente. Certificados de Aforro são boa opção para parte do fundo. Evita investimentos voláteis — o objetivo é segurança, não rentabilidade.'
             },
             {
                 question: 'Posso usar o fundo de emergência para férias?',
-                answer: 'Não. O fundo de emergência é apenas para imprevistos. Para férias, cria um objetivo de poupança separado.'
+                answer: 'Não. O fundo de emergência é exclusivamente para imprevistos (avarias, despesas médicas, perda de emprego). Para férias e outros objetivos, cria uma poupança separada.'
+            },
+            {
+                question: 'Quanto tempo demora a construir um fundo de emergência?',
+                answer: 'Depende do valor que poupas mensalmente. Com €100/mês, atinges €1.200 em um ano e €6.000 em cinco anos. O mais importante é começar, mesmo com valores pequenos, e manter a consistência.'
             }
         ]
     },
@@ -487,6 +738,8 @@ Os mercados emergentes não são para todos. Antes de investir, pondera:
 Os mercados emergentes representam uma das oportunidades mais discutidas de 2026. Para investidores portugueses com horizonte de médio-longo prazo, uma alocação moderada pode adicionar crescimento e diversificação à carteira.
 
 O segredo está na seletividade: escolher veículos de qualidade, manter expectativas realistas e acompanhar a evolução do mercado. Como em qualquer navegação, o destino é importante — mas a preparação é tudo.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
 
 ---
 

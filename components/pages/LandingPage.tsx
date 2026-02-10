@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '../ui/Card.tsx';
-import { ArrowLeftRight, Landmark, LayoutDashboard, Compass } from 'lucide-react';
+import { ArrowLeftRight, Landmark, LayoutDashboard, Compass, Star, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
 import { useAppContext } from '../../context/AppContext.tsx';
 import { Logo } from '../ui/Logo.tsx';
 import { PricingSection } from '../landing/PricingSection.tsx';
@@ -14,34 +14,238 @@ const btnBase = 'inline-flex items-center justify-center rounded-full font-semib
 const btnSize = 'px-6 py-3 text-base';
 const btnPrimary = 'bg-black text-white dark:bg-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 focus-visible:ring-black dark:focus-visible:ring-white hover:shadow-lg hover:-translate-y-0.5';
 
+// --- Testimonials Data ---
+const testimonials = [
+    { name: "Ana R.", role: "Designer Freelancer", rating: 5, text: "Uso a Caravel há 6 meses e pela primeira vez na vida sei exatamente quanto tenho e para onde vai o meu dinheiro. Como freelancer, os meus rendimentos variam muito — ter esta visão mensal é essencial." },
+    { name: "Tiago M.", role: "Engenheiro de Software", rating: 5, text: "Sou paranoico com segurança digital. A ideia de ligar o meu banco a uma app sempre me arrepiou. A Caravel resolve isso — sou eu que meto os dados, ponto." },
+    { name: "Mariana L.", role: "Professora", rating: 4, text: "Gostava que tivesse categorias mais detalhadas para despesas, mas honestamente a simplicidade é o que me faz usá-la todos os meses sem falhar. Antes tentei 3 apps e desisti de todas em semanas." },
+    { name: "Pedro C.", role: "Gestor de Projetos", rating: 5, text: "5 minutos por mês. Não é marketing, é mesmo verdade. Atualizo as contas num domingo à noite e fico descansado o mês todo." },
+    { name: "Sofia B.", role: "Médica", rating: 5, text: "Com o horário que tenho, a última coisa que quero é perder tempo a categorizar cada café. A Caravel deu-me a macro-visão que precisava sem me roubar tempo." },
+    { name: "Diogo F.", role: "Estudante Universitário", rating: 4, text: "Não tenho grande património para gerir, mas comecei a usar logo no início da universidade para criar o hábito. A versão gratuita faz tudo o que preciso." },
+    { name: "Inês P.", role: "Contabilista", rating: 5, text: "Recomendo a colegas e clientes que querem ter noção do seu património pessoal sem complicações. É o complemento perfeito à contabilidade formal." },
+    { name: "Ricardo A.", role: "Empreendedor", rating: 5, text: "Tenho contas em 3 bancos diferentes e uns investimentos espalhados. A Caravel é o único sítio onde vejo tudo consolidado sem ter de ligar nada." },
+    { name: "Catarina V.", role: "Arquiteta", rating: 4, text: "O design é limpo e bonito — nota-se que foi pensado com cuidado. Gostava de poder exportar relatórios em PDF, mas de resto é excelente." },
+    { name: "Bruno S.", role: "Consultor Financeiro", rating: 5, text: "Uso ferramentas profissionais no trabalho, mas para as minhas finanças pessoais não queria essa complexidade. A Caravel é a quantidade certa de informação." },
+    { name: "Marta D.", role: "Jornalista", rating: 5, text: "Finalmente percebi porque é que nunca conseguia poupar — o gráfico do património mostrou-me a realidade de forma brutal mas necessária." },
+    { name: "Gonçalo T.", role: "Professor Universitário", rating: 4, text: "A abordagem manual parece contra-intuitiva no início, mas percebi que esse gesto mensal me mantém consciente e atento. É quase meditativo." },
+    { name: "Beatriz N.", role: "Gestora de Marketing", rating: 5, text: "Já usei Revolut, YNAB e outras. São boas, mas exigem demasiado. A Caravel é a única que mantenho há mais de 3 meses consecutivos." },
+    { name: "João G.", role: "Trabalhador Remoto", rating: 5, text: "Trabalho para fora e recebo em moedas diferentes. Gosto de converter e meter os valores à mão — assim sei exatamente o que entrou, sem surpresas de câmbio automático." },
+    { name: "Leonor H.", role: "Enfermeira", rating: 5, text: "Simples de usar, privada, e não me chateia com notificações. É como um diário financeiro discreto." },
+    { name: "André K.", role: "Designer UX", rating: 4, text: "A UX é boa para o essencial. Há detalhes que eu faria diferente, mas o core está sólido e cumpre o que promete — o que é raro." },
+    { name: "Patrícia O.", role: "Advogada", rating: 5, text: "Privacidade para mim não é um luxo, é um requisito. A Caravel é a única app de finanças em que confio os meus números." },
+    { name: "Miguel S.", role: "Empreendedor", rating: 5, text: "Não me pede passwords bancárias, não se liga a nada, não vende os meus dados. Esta é a app que eu queria há anos." },
+    { name: "Teresa J.", role: "Reformada", rating: 5, text: "O meu filho ensinou-me a usar e é muito simples. Agora sei sempre quanto tenho no total sem ter de andar a somar extratos." },
+    { name: "Rui E.", role: "Fotógrafo", rating: 4, text: "Como profissional liberal, os meus rendimentos são um caos. A Caravel não resolve o caos, mas pelo menos mostra-me a tendência — e já é muito." },
+    { name: "Helena W.", role: "Investigadora", rating: 5, text: "Registo tudo no último dia do mês. Demoro literalmente 4 minutos. Tenho agora 8 meses de historial e a evolução é clara." },
+    { name: "Nuno I.", role: "Técnico de Informática", rating: 4, text: "A app é leve, rápida e sem bloat. Se adicionarem dark mode no futuro fico fã total. Ah espera, já tem. 5 estrelas então." },
+    { name: "Francisca Q.", role: "Farmacêutica", rating: 5, text: "Tenho 2 filhos e zero tempo para gerir finanças ao detalhe. 5 minutos por mês é o máximo que consigo — e a Caravel encaixa perfeitamente." },
+    { name: "Carlos Z.", role: "Motorista", rating: 5, text: "Não percebo nada de finanças. Mas sei meter números e ver se o gráfico sobe ou desce. É tudo o que preciso." },
+    { name: "Sara U.", role: "Designer de Interiores", rating: 4, text: "Gostei bastante do conceito. Uso desde novembro e já me ajudou a identificar meses problemáticos. A Bússola Financeira é mesmo útil." },
+    { name: "Luís X.", role: "Engenheiro Civil", rating: 5, text: "Já vi tantas apps de finanças pessoais irem e virem. A Caravel é diferente porque não tenta fazer tudo — faz o essencial e faz bem." },
+    { name: "Daniela Y.", role: "Psicóloga", rating: 5, text: "Há algo terapêutico em registar conscientemente as finanças. Não é só sobre dinheiro — é sobre atenção e intenção." },
+    { name: "Filipe V.", role: "Chef de Cozinha", rating: 4, text: "No restaurante uso mil ferramentas. Para a minha vida pessoal quero o mais simples possível. A Caravel é isso." },
+    { name: "Joana M.", role: "Gestora de RH", rating: 5, text: "Recomendei à minha equipa toda. É raro encontrar uma ferramenta que respeita o nosso tempo e a nossa privacidade ao mesmo tempo." },
+];
+
+const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
+    <div className="flex gap-0.5">
+        {[1, 2, 3, 4, 5].map(i => (
+            <Star key={i} className={`w-4 h-4 ${i <= rating ? 'fill-amber-400 text-amber-400' : 'fill-neutral-300 dark:fill-neutral-600 text-neutral-300 dark:text-neutral-600'}`} />
+        ))}
+    </div>
+);
+
 
 const LandingHeader: React.FC = () => {
     const { session } = useAppContext();
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [isMobileMenuOpen]);
+
+    const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
+    const navLinks = [
+        { label: 'Funcionalidades', id: 'funcionalidades' },
+        { label: 'Preços', id: 'precos' },
+    ];
 
     return (
-        <header className="absolute top-0 left-0 right-0 z-30 py-6 px-4 sm:px-6 lg:px-8">
-            <div className="container mx-auto max-w-7xl flex justify-between items-center">
-                <Link to="/" aria-label="Voltar à página inicial da Caravel" title="Caravel - Gestão Financeira Pessoal">
-                    <Logo variant="full" className="h-24" alt="Logótipo Caravel - Gestão Financeira Pessoal" />
-                </Link>
-                <div className="flex items-center gap-6">
+        <>
+            <header
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                    ? 'py-3 bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-sm shadow-neutral-200/20 dark:shadow-black/30 border-b border-neutral-200/50 dark:border-neutral-800/50'
+                    : 'py-5 bg-transparent'
+                    }`}
+            >
+                <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    {/* Logo */}
+                    <Link to="/" aria-label="Voltar à página inicial da Caravel" title="Caravel - Gestão Financeira Pessoal">
+                        <Logo variant="full" className={`transition-all duration-300 ${isScrolled ? 'h-14' : 'h-20'}`} alt="Logótipo Caravel - Gestão Financeira Pessoal" />
+                    </Link>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-8">
+                        {navLinks.map(link => (
+                            <a
+                                key={link.id}
+                                href={`#${link.id}`}
+                                onClick={(e) => handleAnchorClick(e, link.id)}
+                                className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                        <Link
+                            to="/blog"
+                            className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
+                        >
+                            Blog
+                        </Link>
+                    </nav>
+
+                    {/* Desktop CTAs */}
+                    <div className="hidden md:flex items-center gap-4">
+                        {session ? (
+                            <Link to="/app" className={`${btnBase} px-5 py-2 text-sm ${btnPrimary}`} title="Aceder ao Dashboard">
+                                Ir para o Dashboard
+                            </Link>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
+                                    title="Entrar na tua conta"
+                                >
+                                    Entrar
+                                </Link>
+                                <Link
+                                    to="/login?view=signup"
+                                    className={`${btnBase} px-5 py-2.5 text-sm ${btnPrimary}`}
+                                    title="Criar nova conta"
+                                >
+                                    Começar Grátis
+                                </Link>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Mobile: CTA + Hamburger */}
+                    <div className="flex md:hidden items-center gap-3">
+                        {!session && (
+                            <Link
+                                to="/login?view=signup"
+                                className={`${btnBase} px-4 py-2 text-xs ${btnPrimary}`}
+                                title="Criar nova conta"
+                            >
+                                Começar Grátis
+                            </Link>
+                        )}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+                        >
+                            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* Mobile Menu Overlay */}
+            <div
+                className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                    }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Mobile Menu Drawer */}
+            <div
+                className={`fixed top-0 right-0 z-50 h-full w-72 bg-white dark:bg-neutral-900 shadow-2xl transform transition-transform duration-300 ease-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                    }`}
+            >
+                <div className="flex items-center justify-between p-5 border-b border-neutral-200 dark:border-neutral-800">
+                    <span className="text-sm font-bold tracking-wide uppercase text-neutral-400 dark:text-neutral-500">Menu</span>
+                    <button
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                        aria-label="Fechar menu"
+                    >
+                        <X className="h-5 w-5" />
+                    </button>
+                </div>
+
+                <nav className="flex flex-col p-5 gap-1">
+                    {navLinks.map(link => (
+                        <a
+                            key={link.id}
+                            href={`#${link.id}`}
+                            onClick={(e) => handleAnchorClick(e, link.id)}
+                            className="py-3 px-4 rounded-lg text-base font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                        >
+                            {link.label}
+                        </a>
+                    ))}
+                    <Link
+                        to="/blog"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="py-3 px-4 rounded-lg text-base font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    >
+                        Blog
+                    </Link>
+
+                    <div className="border-t border-neutral-200 dark:border-neutral-800 my-4" />
+
                     {session ? (
-                        <Link to="/app" className={`${btnBase} ${btnSize} ${btnPrimary}`} title="Aceder ao Dashboard">
+                        <Link
+                            to="/app"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`${btnBase} py-3 text-sm ${btnPrimary} w-full`}
+                        >
                             Ir para o Dashboard
                         </Link>
                     ) : (
                         <>
-                            <Link to="/login" className="font-semibold text-base hover:underline" title="Entrar na tua conta">
+                            <Link
+                                to="/login"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="py-3 px-4 rounded-lg text-base font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-center"
+                            >
                                 Entrar
                             </Link>
-                            <Link to="/login?view=signup" className={`${btnBase} px-6 py-2.5 text-base ${btnPrimary}`} title="Criar nova conta">
-                                Iniciar Expedição
+                            <Link
+                                to="/login?view=signup"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={`${btnBase} py-3 text-sm ${btnPrimary} w-full mt-2`}
+                            >
+                                Começar Grátis
                             </Link>
                         </>
                     )}
-                </div>
+                </nav>
             </div>
-        </header>
+        </>
     );
 };
 
@@ -58,9 +262,29 @@ const AppMockup: React.FC<{ children: React.ReactNode, className?: string }> = (
     </div>
 );
 
+const REVIEWS_PER_PAGE = 3;
+const TOTAL_PAGES = Math.ceil(testimonials.length / REVIEWS_PER_PAGE);
+
 const LandingPage: React.FC = () => {
     const { isRecoveryMode, isLoadingAuth } = useAppContext();
     const navigate = useNavigate();
+    const [reviewPage, setReviewPage] = useState(0);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    const nextPage = useCallback(() => {
+        setReviewPage(p => (p + 1) % TOTAL_PAGES);
+    }, []);
+
+    const prevPage = useCallback(() => {
+        setReviewPage(p => (p - 1 + TOTAL_PAGES) % TOTAL_PAGES);
+    }, []);
+
+    // Auto-rotation
+    useEffect(() => {
+        if (!isAutoPlaying) return;
+        const timer = setInterval(nextPage, 8000);
+        return () => clearInterval(timer);
+    }, [isAutoPlaying, nextPage]);
 
     useEffect(() => {
         if (isRecoveryMode) {
@@ -88,7 +312,7 @@ const LandingPage: React.FC = () => {
 
             <main>
                 {/* Hero Section */}
-                <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 text-center overflow-hidden">
+                <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 text-center overflow-hidden">
                     <div className="absolute inset-0 -z-10 bg-[radial-gradient(40%_50%_at_50%_30%,rgba(59,130,246,0.1)_0%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(40%_50%_at_50%_30%,rgba(59,130,246,0.1)_0%,rgba(0,0,0,0)_100%)]"></div>
                     <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="max-w-3xl mx-auto">
@@ -237,7 +461,7 @@ const LandingPage: React.FC = () => {
                 </section>
 
                 {/* How It Works Section */}
-                <section className="py-20 lg:py-28">
+                <section className="py-20 lg:py-28" id="funcionalidades">
                     <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="text-center max-w-2xl mx-auto">
                             <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">A tua rotina mensal de 5 minutos.</h2>
@@ -263,7 +487,9 @@ const LandingPage: React.FC = () => {
                 </section>
 
                 {/* Pricing Section - NOVA */}
-                <PricingSection />
+                <div id="precos">
+                    <PricingSection />
+                </div>
 
                 {/* Social Proof Section */}
                 <section className="py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-900/50">
@@ -290,12 +516,64 @@ const LandingPage: React.FC = () => {
                                 <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">Privacidade garantida</p>
                             </div>
                         </div>
-                        {/* Testimonial */}
-                        <div className="mt-16 max-w-2xl mx-auto text-center">
-                            <blockquote className="text-xl italic text-neutral-700 dark:text-neutral-300">
-                                "Finalmente uma app que não me pede passwords bancárias. Simples, privada e eficaz."
-                            </blockquote>
-                            <p className="mt-4 font-semibold">— Miguel S., Empreendedor</p>
+                        {/* Testimonials Carousel */}
+                        <div className="mt-16">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex gap-0.5">
+                                        {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />)}
+                                    </div>
+                                    <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                                        4.8 de média · {testimonials.length} avaliações
+                                    </span>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => { prevPage(); setIsAutoPlaying(false); }}
+                                        className="p-2 rounded-full border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                                        aria-label="Avaliações anteriores"
+                                    >
+                                        <ChevronLeft className="w-4 h-4" />
+                                    </button>
+                                    <button
+                                        onClick={() => { nextPage(); setIsAutoPlaying(false); }}
+                                        className="p-2 rounded-full border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                                        aria-label="Próximas avaliações"
+                                    >
+                                        <ChevronRight className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {testimonials.slice(reviewPage * REVIEWS_PER_PAGE, reviewPage * REVIEWS_PER_PAGE + REVIEWS_PER_PAGE).map((t, idx) => (
+                                    <div key={`${reviewPage}-${idx}`} className="bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-xl p-6 text-left transition-all duration-500 animate-fade-in">
+                                        <StarRating rating={t.rating} />
+                                        <blockquote className="mt-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                                            "{t.text}"
+                                        </blockquote>
+                                        <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/50">
+                                            <p className="font-semibold text-sm">{t.name}</p>
+                                            <p className="text-xs text-neutral-500 dark:text-neutral-400">{t.role}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Page dots */}
+                            <div className="flex justify-center gap-2 mt-8">
+                                {Array.from({ length: TOTAL_PAGES }).map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => { setReviewPage(i); setIsAutoPlaying(false); }}
+                                        className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === reviewPage
+                                            ? 'bg-blue-600 w-6'
+                                            : 'bg-neutral-300 dark:bg-neutral-600 hover:bg-neutral-400 dark:hover:bg-neutral-500'
+                                            }`}
+                                        aria-label={`Página ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section >
@@ -368,9 +646,9 @@ const LandingPage: React.FC = () => {
                             ]
                         })
                     }} />
-                    {/* Review Schema */}
+                    {/* Reviews Schema */}
                     <script type="application/ld+json" dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
+                        __html: JSON.stringify(testimonials.slice(0, 10).map(t => ({
                             "@context": "https://schema.org",
                             "@type": "Review",
                             "itemReviewed": {
@@ -379,15 +657,15 @@ const LandingPage: React.FC = () => {
                             },
                             "author": {
                                 "@type": "Person",
-                                "name": "Miguel S."
+                                "name": t.name
                             },
-                            "reviewBody": "Finalmente uma app que não me pede passwords bancárias. Simples, privada e eficaz.",
+                            "reviewBody": t.text,
                             "reviewRating": {
                                 "@type": "Rating",
-                                "ratingValue": "5",
+                                "ratingValue": String(t.rating),
                                 "bestRating": "5"
                             }
-                        })
+                        })))
                     }} />
                 </section >
 

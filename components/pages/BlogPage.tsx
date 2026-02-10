@@ -6,14 +6,20 @@ import { ArrowRight, Calendar, X } from 'lucide-react';
 import { blogPosts, allTags } from '../../data/blogPosts.ts';
 
 const BlogHeader: React.FC = () => (
-    <header className="py-6 px-4 sm:px-6 lg:px-8 border-b border-neutral-200 dark:border-neutral-800">
-        <div className="container mx-auto max-w-7xl flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 py-3 bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-sm shadow-neutral-200/20 dark:shadow-black/30 border-b border-neutral-200/50 dark:border-neutral-800/50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <Link to="/" aria-label="Voltar à página inicial" title="Caravel - Gestão Financeira Pessoal">
-                <Logo variant="full" className="h-16" />
+                <Logo variant="full" className="h-14" />
             </Link>
-            <nav className="flex items-center gap-6">
-                <Link to="/login" className="font-semibold text-sm hover:underline">Entrar</Link>
+            <nav className="hidden md:flex items-center gap-8">
+                <Link to="/#funcionalidades" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Funcionalidades</Link>
+                <Link to="/#precos" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Preços</Link>
+                <Link to="/blog" className="text-sm font-medium text-black dark:text-white transition-colors">Blog</Link>
             </nav>
+            <div className="flex items-center gap-4">
+                <Link to="/login" className="hidden md:inline text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors">Entrar</Link>
+                <Link to="/login?view=signup" className="px-5 py-2.5 text-sm font-semibold bg-black dark:bg-white text-white dark:text-black rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors">Começar Grátis</Link>
+            </div>
         </div>
     </header>
 );
@@ -103,7 +109,7 @@ const BlogPage: React.FC = () => {
         <div className="bg-white dark:bg-black text-black dark:text-white min-h-screen">
             <BlogHeader />
 
-            <main className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+            <main className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-24 pb-12">
                 {/* Page Header */}
                 <div className="mb-12">
                     <h1 className="font-display text-4xl font-extrabold tracking-tight">Blog Caravel</h1>
