@@ -1,11 +1,31 @@
 # Netlify Configuration for Caravel
-# Enables SPA routing for BrowserRouter
+# Enables SPA routing for BrowserRouter with proper SEO handling
 
-# Redirect all routes to index.html for client-side routing
+# Prerendered pages — serve static HTML directly (created by vite-plugin-seo-prerender)
+# These files exist as /route/index.html in dist/ after build
+
+# SPA fallback — known app routes get index.html (200)
+# Netlify serves prerendered /route/index.html automatically for static routes
 [[redirects]]
-  from = "/*"
+  from = "/app/*"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/login?*"
+  to = "/index.html"
+  status = 200
+
+# Unknown routes → proper 404
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
 
 # Custom headers for SEO and security
 [[headers]]
@@ -25,5 +45,11 @@
 # Cache favicons
 [[headers]]
   for = "/favicon.*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Cache OG image
+[[headers]]
+  for = "/og-image.png"
   [headers.values]
     Cache-Control = "public, max-age=86400"

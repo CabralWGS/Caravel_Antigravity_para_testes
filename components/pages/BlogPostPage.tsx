@@ -31,8 +31,49 @@ const BlogPostPage: React.FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         if (slug && blogPostsData[slug]) {
-            setPost(blogPostsData[slug]);
+            const p = blogPostsData[slug];
+            setPost(p);
+
+            // SEO: Dynamic meta tags for prerendering
+            document.title = `${p.title} | Blog Caravel`;
+
+            // Set canonical
+            let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+            if (!canonical) {
+                canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                document.head.appendChild(canonical);
+            }
+            canonical.href = `https://thecaravelapp.com/blog/${p.slug}`;
+
+            // Set meta description
+            let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+            if (!metaDesc) {
+                metaDesc = document.createElement('meta');
+                metaDesc.name = 'description';
+                document.head.appendChild(metaDesc);
+            }
+            metaDesc.content = p.description;
+
+            // Set OG tags
+            const setOgMeta = (property: string, content: string) => {
+                let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+                if (!meta) {
+                    meta = document.createElement('meta');
+                    meta.setAttribute('property', property);
+                    document.head.appendChild(meta);
+                }
+                meta.content = content;
+            };
+            setOgMeta('og:title', p.title);
+            setOgMeta('og:description', p.description);
+            setOgMeta('og:url', `https://thecaravelapp.com/blog/${p.slug}`);
+            setOgMeta('og:type', 'article');
         }
+
+        return () => {
+            document.title = 'Caravel | Gestão Financeira Pessoal Manual & Privada';
+        };
     }, [slug]);
 
     if (!post) {

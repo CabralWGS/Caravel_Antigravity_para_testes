@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Logo } from '../ui/Logo.tsx';
 import { Footer } from '../landing/Footer.tsx';
@@ -95,6 +95,33 @@ const BlogCard: React.FC<{ post: typeof blogPosts[0] }> = ({ post }) => {
 const BlogPage: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeTag = searchParams.get('tag');
+
+    // SEO: Dynamic meta tags for prerendering
+    useEffect(() => {
+        document.title = 'Blog Caravel | Artigos sobre Finanças Pessoais';
+
+        // Set canonical
+        let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.rel = 'canonical';
+            document.head.appendChild(canonical);
+        }
+        canonical.href = 'https://thecaravelapp.com/blog';
+
+        // Set meta description
+        let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+        if (!metaDesc) {
+            metaDesc = document.createElement('meta');
+            metaDesc.name = 'description';
+            document.head.appendChild(metaDesc);
+        }
+        metaDesc.content = 'Artigos sobre finanças pessoais, poupança, investimentos e gestão de património em Portugal. Dicas práticas para assumir o rumo das tuas finanças.';
+
+        return () => {
+            document.title = 'Caravel | Gestão Financeira Pessoal Manual & Privada';
+        };
+    }, []);
 
     // Filter posts by tag if active
     const filteredPosts = activeTag
