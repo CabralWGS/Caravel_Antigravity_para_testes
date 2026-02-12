@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Logo } from '../ui/Logo.tsx';
 import { Footer } from '../landing/Footer.tsx';
-import { ArrowLeft, User } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { blogPostsData, BlogPost } from '../../data/blogPosts.ts';
 
 const BlogHeader: React.FC = () => (
@@ -134,8 +134,8 @@ const BlogPostPage: React.FC = () => {
 
                         <div className="flex flex-wrap items-center gap-6 pt-4 text-sm text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 mt-8">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
-                                    <User className="h-5 w-5 text-neutral-600 dark:text-neutral-300" />
+                                <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center overflow-hidden">
+                                    <img src="/favicon.svg" alt="Caravel" className="w-7 h-7" />
                                 </div>
                                 <div>
                                     <p className="font-semibold text-black dark:text-white">{post.author}</p>
@@ -365,7 +365,7 @@ const BlogPostPage: React.FC = () => {
                     "@type": "Article",
                     "headline": post.title,
                     "description": post.description,
-                    "author": { "@type": "Organization", "name": "Caravel" },
+                    "author": { "@type": "Organization", "name": "Caravel", "url": "https://thecaravelapp.com", "logo": "https://thecaravelapp.com/favicon.svg" },
                     "publisher": { "@type": "Organization", "name": "Caravel", "logo": { "@type": "ImageObject", "url": "https://thecaravelapp.com/favicon.svg" } },
                     "datePublished": post.date,
                     "dateModified": post.date,

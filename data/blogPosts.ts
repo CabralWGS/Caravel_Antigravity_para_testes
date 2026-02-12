@@ -28,12 +28,126 @@ export const allTags = [
     'irs',
     'impostos',
     'reforma',
+    'patrimônio',
 ] as const;
 
 export type BlogTag = typeof allTags[number];
 
 // Blog posts with full content
 export const blogPostsData: Record<string, BlogPost> = {
+    'patrimonio-liquido-net-worth': {
+        slug: 'patrimonio-liquido-net-worth',
+        title: 'Património Líquido: Como Calcular e Acompanhar o Teu Net Worth em 2026',
+        description: 'Descobre o que é o património líquido, como calcular o teu net worth passo a passo e porque é a métrica mais importante das tuas finanças pessoais.',
+        date: '2026-02-12',
+        readTime: '7 min',
+        author: 'Caravel Team',
+        tags: ['patrimônio', 'finanças pessoais', 'portugal', 'literacia financeira'],
+        thumbnail: '/blog/patrimonio-liquido-net-worth.webp',
+        content: `
+## O Que É o Património Líquido e Como se Calcula?
+
+O Património Líquido (ou *Net Worth*) é o verdadeiro termómetro da tua saúde financeira. Ao contrário do salário, que mede quanto ganhas, o património líquido mede **quanto tens**. É o resultado simples de uma subtração poderosa: **Ativos (o que tens)** menos **Passivos (o que deves)**.
+
+Em Portugal, muitas famílias focam-se apenas no rendimento mensal, ignorando esta métrica. No entanto, é possível ter um salário alto e um património líquido negativo (se as dívidas superarem os bens).
+
+> "O rendimento alimenta o teu estilo de vida hoje. O património líquido alimenta o teu futuro."
+
+---
+
+## A Fórmula do Sucesso
+
+Para calcular o teu património líquido, precisas de listar tudo. A fórmula é universal:
+
+**Património Líquido = Total de Ativos - Total de Passivos**
+
+### O Que Incluir nos Ativos (+)
+*Tudo o que tem valor financeiro e pode ser convertido em dinheiro.*
+
+- **Dinheiro:** Contas à ordem, depósitos a prazo, dinheiro físico.
+- **Investimentos:** Ações, ETFs, PPR, Certificados de Aforro, Criptoactivos.
+- **Imobiliário:** Valor de mercado da tua casa (não o valor de compra).
+- **Veículos:** Valor comercial atual do teu carro ou mota.
+- **Outros:** Joias, obras de arte, participações em empresas.
+
+### O Que Incluir nos Passivos (-)
+*Todas as tuas obrigações financeiras.*
+
+- **Crédito Habitação:** O valor que ainda deves ao banco.
+- **Crédito Automóvel:** O montante em dívida.
+- **Cartões de Crédito:** Saldos por pagar.
+- **Empréstimos Pessoais:** Dívidas a instituições ou familiares.
+
+---
+
+## Exemplo Prático: A Família Silva
+
+Vamos ver um caso realista em Portugal. O João e a Maria têm:
+
+**Ativos:**
+- Casa: €250.000
+- Carro: €15.000
+- Depósitos/PPR: €20.000
+- **Total Ativos: €285.000**
+
+**Passivos:**
+- Crédito Habitação: €180.000
+- Crédito Automóvel: €10.000
+- **Total Passivos: €190.000**
+
+**Património Líquido:** €285.000 - €190.000 = **€95.000**
+
+Isto significa que, se vendessem tudo e pagassem todas as dívidas, sobrariam €95.000. Este é o valor real da sua riqueza.
+
+---
+
+## Como Acompanhar (e Porque Deves Fazê-lo)
+
+Calcular uma vez é útil. Acompanhar ao longo do tempo é transformador.
+
+1. **Define uma Frequência:** Mensalmente é o ideal, mas trimestral ou anualmente também funciona. O importante é a consistência.
+2. **Usa a Ferramenta Certa:** Podes usar uma folha de cálculo ou uma app como a Caravel, que foi desenhada especificamente para este propósito.
+3. **Analisa a Tendência:** O número subiu ou desceu? Porquê? Se o teu património líquido está a crescer, estás no caminho certo, independentemente do teu salário.
+
+### Erros Comuns a Evitar
+
+- **Sobrevalorizar Ativos:** Sê realista com o valor da casa ou do carro. Usa valores de mercado conservadores.
+- **Esquecer Pequenas Dívidas:** Cartões de crédito, BNPL (buy now, pay later) ou dívidas a familiares contam.
+- **Não Atualizar:** Um cálculo de há 3 anos não serve de nada hoje.
+
+---
+
+## Conclusão
+
+Gerir o património líquido é assumir o leme das tuas finanças. Deixas de navegar à vista, preocupado apenas com o fim do mês, e passas a traçar uma rota de longo prazo.
+
+Começa hoje. Faz o teu primeiro inventário, calcula o teu número e regista-o. Daqui a um ano, vais agradecer a ti mesmo.
+
+[Inicia a tua Expedição](https://thecaravelapp.com)
+
+---
+
+*A Caravel é um instrumento de navegação e suporte à decisão. Todo o conteúdo é meramente informativo e não constitui aconselhamento financeiro ou recomendação de investimento.*
+        `,
+        faq: [
+            {
+                question: 'O que é o património líquido?',
+                answer: 'É a diferença entre tudo o que possuis (ativos) e tudo o que deves (passivos). Representa a tua verdadeira riqueza financeira num dado momento.'
+            },
+            {
+                question: 'O meu património líquido pode ser negativo?',
+                answer: 'Sim. Se as tuas dívidas forem superiores ao valor dos teus bens (por exemplo, crédito estudantil elevado sem ativos correspondentes), o teu património líquido será negativo. O objetivo é torná-lo positivo ao longo do tempo.'
+            },
+            {
+                question: 'Com que frequência devo calcular o net worth?',
+                answer: 'Recomendamos uma revisão mensal ou trimestral. Isto permite-te ver o progresso, manter a motivação e ajustar a tua estratégia financeira atempadamente.'
+            },
+            {
+                question: 'A casa conta para o património líquido?',
+                answer: 'Sim. O valor de mercado da tua casa entra nos Ativos. O valor que ainda deves ao banco pelo crédito habitação entra nos Passivos.'
+            }
+        ]
+    },
     'ppr-2026-guia': {
         slug: 'ppr-2026-guia',
         title: 'PPR em 2026: Quanto Rende e Como Deduzir no IRS',
@@ -172,7 +286,9 @@ O primeiro passo é simples: define quanto podes investir mensalmente e compara 
         content: `
 ## O Que Muda no IRS 2026?
 
-A campanha de IRS que se avizinha traz novidades que impactam diretamente a tua carteira. Com a atualização dos escalões em **3,51%** e o aumento do Mínimo de Existência para **€12.880**, muitos portugueses verão uma redução na fatura fiscal. Mas para tirares partido destas mudanças, precisas de navegar com precisão.
+No IRS 2026, os escalões de rendimento foram atualizados em **3,51%** e o Mínimo de Existência subiu para **€12.880**. O prazo de entrega é de **1 de abril a 30 de junho**, com validação obrigatória de faturas no e-Fatura até **2 de março**.
+
+Estas novidades impactam diretamente a tua carteira — muitos portugueses verão uma redução na fatura fiscal. Mas para tirares partido destas mudanças, precisas de navegar com precisão.
 
 > "Pagar apenas o que é justo não é fugir aos impostos — é literacia financeira."
 
@@ -269,9 +385,11 @@ Assome o leme hoje: entra no Portal das Finanças e valida as tuas primeiras fat
         tags: ['literacia financeira', 'finanças pessoais', 'portugal'],
         thumbnail: '/blog/literacia-financeira.webp',
         content: `
-## Porque É Que a Literacia Financeira É Essencial?
+## O Que É Literacia Financeira e Porque É Essencial?
 
-A realidade é clara: quem não compreende como o dinheiro funciona, acaba por ser controlado por ele. Segundo o Banco de Portugal, apenas **27% dos portugueses** demonstram conhecimentos financeiros adequados — um dos valores mais baixos da Europa. Em contrapartida, quem domina os princípios básicos da gestão financeira conquista:
+Literacia financeira é a capacidade de compreender e aplicar conceitos financeiros — como orçamentação, poupança, investimento e gestão de dívida — para tomar decisões informadas sobre dinheiro. Em Portugal, apenas **27% da população** demonstra conhecimentos financeiros adequados, segundo o Banco de Portugal.
+
+Quem não compreende como o dinheiro funciona acaba por ser controlado por ele. Em contrapartida, quem domina os princípios básicos da gestão financeira conquista:
 
 - **Autonomia** — Tomas decisões sem depender de terceiros
 - **Segurança** — Constróis uma reserva de emergência sólida
@@ -402,11 +520,11 @@ Se procuras uma ferramenta que te ajude a organizar as tuas finanças com total 
         tags: ['orçamento', 'finanças pessoais', 'poupança'],
         thumbnail: '/blog/orcamento-pessoal.webp',
         content: `
-## Porque Precisas de um Orçamento?
+## Como Criar um Orçamento Pessoal?
 
-Um orçamento pessoal é a ferramenta mais eficaz para tomar o controlo das tuas finanças. Permite-te saber exatamente para onde vai cada euro, identificar gastos desnecessários e criar margem para poupar. Segundo dados recentes, **67% dos portugueses não têm um orçamento definido** — e é precisamente por isso que tantas famílias chegam ao fim do mês sem saber onde foi o dinheiro.
+Para criar um orçamento pessoal, segue estes 5 passos: **1)** calcula os rendimentos líquidos, **2)** lista as despesas fixas, **3)** estima as despesas variáveis, **4)** define metas de poupança com a regra 50/30/20, e **5)** revê e ajusta mensalmente.
 
-A boa notícia: criar um orçamento não é complicado. Em 5 passos, consegues montar um sistema que te dá clareza e controlo.
+Um orçamento é a ferramenta mais eficaz para tomar o controlo das tuas finanças — permite-te saber exatamente para onde vai cada euro. Segundo dados recentes, **67% dos portugueses não têm um orçamento definido**, e é precisamente por isso que tantas famílias chegam ao fim do mês sem saber onde foi o dinheiro.
 
 > Quem não sabe para onde vai o dinheiro nunca vai ter o suficiente. O orçamento não é uma restrição — é um mapa.
 
@@ -654,9 +772,11 @@ O primeiro passo é simples: abre uma conta separada e configura uma transferên
         tags: ['investimentos', 'mercados emergentes', 'portugal', 'finanças pessoais'],
         thumbnail: '/blog/mercados-emergentes-2026.webp',
         content: `
-## Porque Estão os Mercados Emergentes a Brilhar em 2026?
+## O Que São Mercados Emergentes e Porque Brilham em 2026?
 
-Os mercados emergentes são, pela primeira vez numa década, a aposta favorita de Wall Street. Após anos de subdesempenho face aos EUA, estas economias superaram o S&P 500 em 2025 e os analistas preveem um **ciclo plurianual de entrada de capitais**. Para investidores portugueses, esta tendência abre portas a uma diversificação geográfica que há muito estava esquecida.
+Mercados emergentes são economias em desenvolvimento rápido — como Brasil, Índia, China, Indonésia e México — que oferecem potencial de crescimento superior às economias maduras. Em 2026, são a aposta favorita de Wall Street pela primeira vez numa década.
+
+Após anos de subdesempenho face aos EUA, estas economias superaram o S&P 500 em 2025 e os analistas preveem um **ciclo plurianual de entrada de capitais**. Para investidores portugueses, esta tendência abre portas a uma diversificação geográfica que há muito estava esquecida.
 
 - **Rentabilidade superior** — Ações emergentes bateram as americanas em 2025
 - **Juros em queda** — Ciclos de corte de taxas favorecem mercados em desenvolvimento
